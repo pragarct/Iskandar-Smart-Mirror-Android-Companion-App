@@ -17,7 +17,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = ("kotlin-android-template")
+rootProject.name = ("iskandar-mirror-companion")
 
 include(
     "app",
