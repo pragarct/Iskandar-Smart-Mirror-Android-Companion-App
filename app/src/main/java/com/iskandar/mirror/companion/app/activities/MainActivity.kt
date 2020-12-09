@@ -1,13 +1,16 @@
-package com.iskandar.mirror.companion.app
+package com.iskandar.mirror.companion.app.activities
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import com.iskandar.mirror.companion.app.R
+import com.iskandar.mirror.companion.app.classes.BaseActivity
+import com.iskandar.mirror.companion.app.classes.makeClearableEditText
+import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
 import com.iskandar.mirror.companion.library.FactorialCalculator
 import com.iskandar.mirror.companion.library.android.NotificationUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val notificationUtil: NotificationUtil by lazy { NotificationUtil(this) }
 
@@ -28,5 +31,10 @@ class MainActivity : AppCompatActivity() {
                 message = result
             )
         }
+
+        // Add clear buttons to EditTexts, and drawableEnd in xml allow a clear button to be made
+        addRightCancelDrawable(edit_text_factorial)
+        edit_text_factorial.onRightDrawableClicked { it.text.clear() }
+        edit_text_factorial.makeClearableEditText(null, null)
     }
 }

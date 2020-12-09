@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:padding="@dimen/doub_grid_size"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <TextView
         android:id="@+id/title"
@@ -31,6 +31,7 @@
         android:id="@+id/edit_text_factorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/cancel"
         android:hint="@string/factorial_hint"
         android:importantForAutofill="no"
         android:inputType="number"
