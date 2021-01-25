@@ -1,8 +1,24 @@
 <resources>
+
+    <!--    <string name=""></string>   -->
+
+    <!--Universal-->
     <string name="app_name">Iskandar Smart Mirror Companion App</string>
+
+
+    <!--TestStart-->
+    <string name="normal_start_button">Normal Start</string>
+    <string name="quick_start_button">Quick Start</string>
+    <string name="send_test_data_button">Send Test Data</string>
+
+    <!--InitialStartup-->
+
+    <!--Original Factorial-->
     <string name="title">This is just a template</string>
     <string name="description">You can compute a factorial using the library-kotlin module. The result will be also shown in a notification using the library-android module.</string>
     <string name="factorial_hint">Insert a number to compute his factorial</string>
     <string name="compute">Compute</string>
     <string name="notification_title">The Result is:</string>
+    <string name="title_activity_test">TestActivity</string>
+
 </resources>
