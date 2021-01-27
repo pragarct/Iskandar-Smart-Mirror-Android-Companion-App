@@ -1,5 +1,5 @@
 object Sdk {
-    const val MIN_SDK_VERSION = 21
+    const val MIN_SDK_VERSION = 24
     const val TARGET_SDK_VERSION = 29
     const val COMPILE_SDK_VERSION = 29
 }
@@ -16,7 +16,7 @@ object Versions {
 }
 
 object BuildPluginsVersion {
-    const val AGP = "4.1.1"
+    const val AGP = "4.1.2"
     const val DETEKT = "1.14.2"
     const val KOTLIN = "1.3.72"
     const val KTLINT = "9.4.1"
