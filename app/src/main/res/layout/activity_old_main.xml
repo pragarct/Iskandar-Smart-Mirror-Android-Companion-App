@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:padding="@dimen/doub_grid_size"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.ui.OldMainActivity">
 
     <TextView
         android:id="@+id/title"
@@ -38,7 +38,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

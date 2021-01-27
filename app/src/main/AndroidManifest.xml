@@ -14,8 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+
         <activity
-            android:name=".activities.ui.testStart.TestActivity"
+            android:name=".activities.ui.InitialSetupActivity"
+            android:label="@string/iskandar_initial_setup" />
+
+        <activity
+            android:name=".activities.ui.HomeActivity"
+            android:label="@string/iskandar_home" />
+
+        <activity
+            android:name=".activities.ui.TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,8 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity">
-        </activity>
+
+        <activity android:name=".activities.ui.OldMainActivity" />
+
     </application>
 
 </manifest>

@@ -1,10 +1,13 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
 
-    <!--    <string name=""></string>   -->
+<!--    <string name=""></string>   -->
 
     <!--Universal-->
     <string name="app_name">Iskandar Smart Mirror Companion App</string>
 
+    <!--Activity Names-->
+    <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
+    <string name="iskandar_home">Iskandar Home</string>
 
     <!--TestStart-->
     <string name="normal_start_button">Normal Start</string>
@@ -12,6 +15,19 @@
     <string name="send_test_data_button">Send Test Data</string>
 
     <!--InitialStartup-->
+    <string name="weather_information">Weather Information</string>
+    <string name="ZIP_code">ZIP Code</string>
+    <string name="city">City</string>
+
+    <string name="traffic_information">Traffic Information</string>
+    <string name="home_address">Home Address</string>
+    <string name="work_school_address">Work/School Address</string>
+
+    <string name="submit">Submit</string>
+
+    <!--Home-->
+    <string name="home">Home</string>
+
 
     <!--Original Factorial-->
     <string name="title">This is just a template</string>

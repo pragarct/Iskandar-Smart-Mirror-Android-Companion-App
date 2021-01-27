@@ -10,16 +10,16 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.iskandar.mirror.companion.app.activities.MainActivity
+import com.iskandar.mirror.companion.app.activities.ui.OldMainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class OldMainActivityTest {
 
     @get:Rule
-    var activityRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
+    var activityRule: ActivityScenarioRule<OldMainActivity> = ActivityScenarioRule(OldMainActivity::class.java)
 
     @Test
     fun typeANumber_resultIsDisplayed() {
