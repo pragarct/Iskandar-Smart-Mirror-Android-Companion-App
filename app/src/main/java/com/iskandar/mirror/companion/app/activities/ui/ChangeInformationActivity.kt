@@ -24,7 +24,9 @@ class ChangeInformationActivity : InformationBaseActivity() {
         val homeAddress: String? = intent.extras?.getString("homeAddress")
         val workSchoolAddress: String? = intent.extras?.getString("workSchoolAddress")
 
-        if (!zipCode.isNullOrEmpty() && !city.isNullOrEmpty() && !homeAddress.isNullOrEmpty() && !workSchoolAddress.isNullOrEmpty()) {
+        if (!zipCode.isNullOrEmpty() && !city.isNullOrEmpty() &&
+            !homeAddress.isNullOrEmpty() && !workSchoolAddress.isNullOrEmpty()
+        ) {
             // Set edit texts to currently set values
             zipCodeEditText.setText(zipCode)
             cityEditText.setText(city)
