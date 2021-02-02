@@ -5,15 +5,23 @@
     android:layout_width="wrap_content">
 
     <item
-        android:id="@+id/miItem1"
+        android:id="@+id/nav_home"
         android:title="@string/home" />
 
     <item
-        android:id="@+id/miItem2"
-        android:title="@string/home" />
+        android:id="@+id/nav_alarms"
+        android:title="@string/alarms" />
 
     <item
-        android:id="@+id/miItem3"
-        android:title="@string/home" />
+        android:id="@+id/nav_reminders"
+        android:title="@string/reminders" />
+
+    <item
+        android:id="@+id/nav_background"
+        android:title="@string/background" />
+
+    <item
+        android:id="@+id/nav_change_information"
+        android:title="@string/change_information" />
 
 </menu>

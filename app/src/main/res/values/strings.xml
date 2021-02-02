@@ -7,7 +7,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
-
     <!--Activity Names-->
     <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
     <string name="iskandar_home">Iskandar Home</string>
@@ -36,6 +35,17 @@
     <!--Home-->
     <string name="home">Home</string>
 
+    <!--Alarms-->
+    <string name="alarms">Alarms</string>
+
+    <!--Reminders-->
+    <string name="reminders">Reminders</string>
+
+    <!--Background-->
+    <string name="background">Background</string>
+
+    <!--Change Information-->
+    <string name="change_information">Change Information</string>
 
     <!--Original Factorial-->
     <string name="title">This is just a template</string>
