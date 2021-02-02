@@ -15,6 +15,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".classes.InformationBaseActivity" />
+        <activity
+            android:name=".activities.ui.ChangeInformationActivity"
+            android:label="@string/change_information" />
+        <activity
             android:name=".activities.ui.BackgroundOverviewActivity"
             android:label="@string/background" />
         <activity

@@ -14,8 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.ChangeInformationActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
-import com.iskandar.mirror.companion.app.activities.ui.InitialSetupActivity
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import kotlinx.android.synthetic.main.activity_home.*
@@ -44,7 +44,8 @@ open class BaseActivity : AppCompatActivity() {
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        side_nav_view.setNavigationItemSelectedListener {
+
+        nav_view.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
                     val intent = Intent(this, HomeActivity::class.java)
@@ -63,7 +64,18 @@ open class BaseActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.nav_change_information -> {
-                    val intent = Intent(this, InitialSetupActivity::class.java)
+                    val intent = Intent(this, ChangeInformationActivity::class.java)
+
+                    val zipCode = "45233"
+                    val city = "Cincinnati"
+                    val homeAddress = "858 Braemore Lane"
+                    val workSchoolAddress = "4900 Waterstone Boulevard"
+
+                    intent.putExtra("zipCode", zipCode)
+                    intent.putExtra("city", city)
+                    intent.putExtra("homeAddress", homeAddress)
+                    intent.putExtra("workSchoolAddress", workSchoolAddress)
+
                     startActivity(intent)
                 }
             }
