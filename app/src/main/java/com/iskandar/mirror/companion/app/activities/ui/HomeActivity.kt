@@ -33,5 +33,9 @@ class HomeActivity : BaseActivity() {
             val intent = Intent(this, ChangeInformationActivity::class.java)
             startActivity(intent)
         }
+        lighting_button.setOnClickListener {
+            val intent = Intent(this, LightingActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

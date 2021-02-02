@@ -47,6 +47,9 @@
     <!--Change Information-->
     <string name="change_information">Change Information</string>
 
+    <!--Lighting-->
+    <string name="lighting">Lighting</string>
+
     <!--Original Factorial-->
     <string name="title">This is just a template</string>
     <string name="description">You can compute a factorial using the library-kotlin module. The result will be also shown in a notification using the library-android module.</string>

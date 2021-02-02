@@ -16,6 +16,7 @@ import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.ChangeInformationActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
+import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import kotlinx.android.synthetic.main.activity_home.*
@@ -76,6 +77,10 @@ open class BaseActivity : AppCompatActivity() {
                     intent.putExtra("homeAddress", homeAddress)
                     intent.putExtra("workSchoolAddress", workSchoolAddress)
 
+                    startActivity(intent)
+                }
+                R.id.nav_lighting -> {
+                    val intent = Intent(this, LightingActivity::class.java)
                     startActivity(intent)
                 }
             }

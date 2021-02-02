@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".classes.InformationBaseActivity" />
+            android:name=".activities.ui.LightingActivity"
+            android:label="@string/lighting"/>
+        <activity android:name=".classes.InformationBaseActivity" />
         <activity
             android:name=".activities.ui.ChangeInformationActivity"
             android:label="@string/change_information" />

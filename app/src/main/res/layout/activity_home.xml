@@ -173,6 +173,7 @@
 
             <!-- Column 1 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/lighting_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
@@ -193,12 +194,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home"
+                        android:text="@string/lighting"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:drawableTopCompat="@drawable/ic_home" />
+                        app:drawableTopCompat="@drawable/ic_color" />
 
                 </LinearLayout>
 
