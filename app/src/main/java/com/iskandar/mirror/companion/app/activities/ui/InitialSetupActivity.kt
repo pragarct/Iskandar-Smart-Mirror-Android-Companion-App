@@ -2,6 +2,7 @@ package com.iskandar.mirror.companion.app.activities.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import com.iskandar.mirror.companion.app.classes.makeClearableEditText
@@ -27,9 +28,44 @@ class InitialSetupActivity : BaseActivity() {
         workSchoolAddressEditText.onRightDrawableClicked { it.text.clear() }
         workSchoolAddressEditText.makeClearableEditText(null, null)
 
+        // Submit is pressed, run data validation
+        var initialDataIsValid = true
         submitButton.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+            // ZIP code is not entered correctly
+            if (zipCodeEditText.length() != 5) {
+                val failedString = getString(R.string.zip_error_message)
+                Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
+                initialDataIsValid = false
+            }
+
+            // No city was entered
+            if (cityEditText.length() == 0) {
+                val failedString = getString(R.string.city_error_message)
+                Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
+                initialDataIsValid = false
+            }
+
+            // No home address was entered
+            if (homeAddressEditText.length() == 0) {
+                val failedString = getString(R.string.home_address_error_message)
+                Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
+                initialDataIsValid = false
+            }
+
+            // No work or school address was entered
+            if (workSchoolAddressEditText.length() == 0) {
+                val failedString = getString(R.string.work_school_address_error_message)
+                Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
+                initialDataIsValid = false
+            }
+
+            // Data is valid, open up Home Activity
+            if (initialDataIsValid) {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            }
+
+            initialDataIsValid = true
         }
     }
 }

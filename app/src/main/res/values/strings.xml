@@ -1,9 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
 
-<!--    <string name=""></string>   -->
+    <!--    <string name=""></string>   -->
 
     <!--Universal-->
     <string name="app_name">Iskandar Smart Mirror Companion App</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
 
     <!--Activity Names-->
     <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
@@ -22,6 +25,11 @@
     <string name="traffic_information">Traffic Information</string>
     <string name="home_address">Home Address</string>
     <string name="work_school_address">Work/School Address</string>
+
+    <string name="zip_error_message">Please enter a 5-digit ZIP code.</string>
+    <string name="city_error_message">Please enter a city.</string>
+    <string name="home_address_error_message">Please enter a home address.</string>
+    <string name="work_school_address_error_message">Please enter either your work or school address.</string>
 
     <string name="submit">Submit</string>
 
