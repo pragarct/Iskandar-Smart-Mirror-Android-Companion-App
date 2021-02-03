@@ -18,6 +18,7 @@ import com.iskandar.mirror.companion.app.activities.ui.ChangeInformationActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
 import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -65,27 +66,35 @@ open class BaseActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.nav_change_information -> {
-                    val intent = Intent(this, ChangeInformationActivity::class.java)
-
-                    val zipCode = "45233"
-                    val city = "Cincinnati"
-                    val homeAddress = "858 Braemore Lane"
-                    val workSchoolAddress = "4900 Waterstone Boulevard"
-
-                    intent.putExtra("zipCode", zipCode)
-                    intent.putExtra("city", city)
-                    intent.putExtra("homeAddress", homeAddress)
-                    intent.putExtra("workSchoolAddress", workSchoolAddress)
-
+                    var intent = Intent(this, ChangeInformationActivity::class.java)
+                    intent = getWeatherAndTrafficInformation(intent)
                     startActivity(intent)
                 }
                 R.id.nav_lighting -> {
                     val intent = Intent(this, LightingActivity::class.java)
                     startActivity(intent)
                 }
+                R.id.nav_events -> {
+                    val intent = Intent(this, EventsOverviewActivity::class.java)
+                    startActivity(intent)
+                }
             }
             true
         }
+    }
+
+    fun getWeatherAndTrafficInformation(intent: Intent): Intent {
+        val zipCode = "45233"
+        val city = "Cincinnati"
+        val homeAddress = "858 Braemore Lane"
+        val workSchoolAddress = "4900 Waterstone Boulevard"
+
+        intent.putExtra("zipCode", zipCode)
+        intent.putExtra("city", city)
+        intent.putExtra("homeAddress", homeAddress)
+        intent.putExtra("workSchoolAddress", workSchoolAddress)
+
+        return intent
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
@@ -30,11 +31,16 @@ class HomeActivity : BaseActivity() {
             startActivity(intent)
         }
         change_information_button.setOnClickListener {
-            val intent = Intent(this, ChangeInformationActivity::class.java)
+            var intent = Intent(this, ChangeInformationActivity::class.java)
+            intent = getWeatherAndTrafficInformation(intent)
             startActivity(intent)
         }
         lighting_button.setOnClickListener {
             val intent = Intent(this, LightingActivity::class.java)
+            startActivity(intent)
+        }
+        events_button.setOnClickListener {
+            val intent = Intent(this, EventsOverviewActivity::class.java)
             startActivity(intent)
         }
     }
