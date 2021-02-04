@@ -27,10 +27,10 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_visible" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_visible"
         android:layout_width="369dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ListView
+        android:id="@+id/lv_visible"
         android:layout_width="365dp"
         android:layout_height="538dp"
         android:layout_marginTop="8dp"
