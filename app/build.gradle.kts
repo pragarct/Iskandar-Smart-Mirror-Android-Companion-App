@@ -56,6 +56,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.3")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    implementation("com.github.QuadFlask:colorpicker:0.0.15")
+
     testImplementation(TestingLib.JUNIT)
 
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)
