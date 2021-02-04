@@ -2,14 +2,25 @@ package com.iskandar.mirror.companion.app.classes
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.iskandar.mirror.companion.app.R
+import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.ChangeInformationActivity
+import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
+import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
+import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
+import kotlinx.android.synthetic.main.activity_home.*
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -25,6 +36,75 @@ open class BaseActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
     }*/
+
+    // Navigation Bar
+    lateinit var toggle: ActionBarDrawerToggle
+
+    fun setUpNavigationBar() {
+        // Navigation Bar Setup
+        toggle = ActionBarDrawerToggle(this, drawer_layout, R.string.open, R.string.close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        nav_view.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_home -> {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_alarms -> {
+                    val intent = Intent(this, AlarmOverviewActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_reminders -> {
+                    val intent = Intent(this, RemindersOverviewActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_background -> {
+                    val intent = Intent(this, BackgroundOverviewActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_change_information -> {
+                    var intent = Intent(this, ChangeInformationActivity::class.java)
+                    intent = getWeatherAndTrafficInformation(intent)
+                    startActivity(intent)
+                }
+                R.id.nav_lighting -> {
+                    val intent = Intent(this, LightingActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_events -> {
+                    val intent = Intent(this, EventsOverviewActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
+    }
+
+    fun getWeatherAndTrafficInformation(intent: Intent): Intent {
+        val zipCode = "45233"
+        val city = "Cincinnati"
+        val homeAddress = "858 Braemore Lane"
+        val workSchoolAddress = "4900 Waterstone Boulevard"
+
+        intent.putExtra("zipCode", zipCode)
+        intent.putExtra("city", city)
+        intent.putExtra("homeAddress", homeAddress)
+        intent.putExtra("workSchoolAddress", workSchoolAddress)
+
+        return intent
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+    // End Navigation Bar
 
     // Close the keyboard on button/screen press and clear focus
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

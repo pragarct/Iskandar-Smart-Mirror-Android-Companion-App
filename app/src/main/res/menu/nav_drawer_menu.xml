@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_menu"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/nav_alarms"
+            android:icon="@drawable/ic_alarm"
+            android:title="@string/alarms" />
+
+        <item
+            android:id="@+id/nav_reminders"
+            android:icon="@drawable/ic_reminders"
+            android:title="@string/reminders" />
+
+        <item
+            android:id="@+id/nav_background"
+            android:icon="@drawable/ic_image"
+            android:title="@string/background" />
+
+        <item
+            android:id="@+id/nav_change_information"
+            android:icon="@drawable/ic_info"
+            android:title="@string/change_information" />
+
+        <item
+            android:id="@+id/nav_lighting"
+            android:icon="@drawable/ic_color"
+            android:title="@string/lighting" />
+
+        <item
+            android:id="@+id/nav_events"
+            android:icon="@drawable/ic_events"
+            android:title="@string/events" />
+    </group>
+</menu>
