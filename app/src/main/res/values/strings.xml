@@ -2,6 +2,11 @@
 
     <!--    <string name=""></string>   -->
 
+    <!--BT Activity-->
+    <string name="bt_title">Find Your Mirror</string>
+    <string name="disc_title">Discovered Devices:</string>
+    <string name="btn_visible">Find Visible</string>
+
     <!--Universal-->
     <string name="app_name">Iskandar Companion App</string>
     <string name="open">Open</string>
