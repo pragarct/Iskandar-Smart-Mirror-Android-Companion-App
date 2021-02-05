@@ -23,11 +23,9 @@ class BTActivity : BaseActivity() {
 
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
         val listView = findViewById<ListView>(R.id.lv_visible)
-        val btnvisible = findViewById<Button>(R.id.btn_visible)
-        btnvisible.setOnClickListener()
-        {
-
-            //find devices that have already been bonded to
+        val btnVisible = findViewById<Button>(R.id.btn_visible)
+        btnVisible.setOnClickListener() {
+            // find devices that have already been bonded to
             val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
             pairedDevices?.forEach { device ->
                 names.add(device.name)
