@@ -1,4 +1,4 @@
-package com.iskandar.mirror.companion.app.activities
+package com.iskandar.mirror.companion.app.activities.ui
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -9,14 +9,18 @@ import android.widget.Button
 import android.widget.ListView
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
+import kotlinx.android.synthetic.main.activity_change_location.*
 
 const val REQUEST_ENABLE_BT = 1
 
-class BTActivity : BaseActivity() {
+class BluetoothActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bt)
+        setContentView(R.layout.activity_bluetooth)
+        setUpNavigationBar()
+        // Highlights the item in the navigation bar
+        nav_view.setCheckedItem(R.id.nav_bluetooth)
 
         val names = mutableListOf<String>()
         val addresses = mutableListOf<String>()

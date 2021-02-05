@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.BluetoothActivity
 import com.iskandar.mirror.companion.app.activities.ui.ChangeLocationActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
 import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
@@ -78,9 +79,14 @@ open class BaseActivity : AppCompatActivity() {
                     intent = getEvents(intent)
                     startActivity(intent)
                 }
-                R.id.nav_change_information -> {
+                R.id.nav_location -> {
                     var intent = Intent(this, ChangeLocationActivity::class.java)
                     intent = getWeatherAndTrafficInformation(intent)
+                    startActivity(intent)
+                }
+                R.id.nav_bluetooth -> {
+                    var intent = Intent(this, BluetoothActivity::class.java)
+                    intent = getBluetoothInformation(intent)
                     startActivity(intent)
                 }
             }
@@ -121,6 +127,10 @@ open class BaseActivity : AppCompatActivity() {
         intent.putExtra("homeAddress", homeAddress)
         intent.putExtra("workSchoolAddress", workSchoolAddress)
 
+        return intent
+    }
+
+    fun getBluetoothInformation(intent: Intent): Intent {
         return intent
     }
 

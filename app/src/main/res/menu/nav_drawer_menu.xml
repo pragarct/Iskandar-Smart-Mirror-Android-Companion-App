@@ -37,8 +37,13 @@
             android:title="@string/events" />
 
         <item
-            android:id="@+id/nav_change_information"
+            android:id="@+id/nav_location"
             android:icon="@drawable/ic_map"
             android:title="@string/location" />
+
+        <item
+            android:id="@+id/nav_bluetooth"
+            android:icon="@drawable/ic_bluetooth"
+            android:title="@string/bluetooth" />
     </group>
 </menu>

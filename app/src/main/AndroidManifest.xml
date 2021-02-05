@@ -23,6 +23,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".activities.ui.BluetoothActivity"
+            android:label="@string/bluetooth">
+        </activity>
+        <activity
             android:name=".activities.ui.LightingActivity"
             android:label="@string/lighting">
         </activity>

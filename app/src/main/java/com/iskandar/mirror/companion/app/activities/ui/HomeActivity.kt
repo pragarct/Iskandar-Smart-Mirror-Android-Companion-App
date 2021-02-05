@@ -48,5 +48,10 @@ class HomeActivity : BaseActivity() {
             intent = getWeatherAndTrafficInformation(intent)
             startActivity(intent)
         }
+        bluetooth_button.setOnClickListener {
+            var intent = Intent(this, BluetoothActivity::class.java)
+            intent = getBluetoothInformation(intent)
+            startActivity(intent)
+        }
     }
 }

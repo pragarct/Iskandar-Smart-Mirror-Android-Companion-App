@@ -49,11 +49,6 @@
     <!--Background-->
     <string name="background">Background</string>
 
-    <!--Change Information-->
-    <string name="change_location">Change Location</string>
-    <string name="location">Location</string>
-    <string name="hex_error_message">Please enter a hex color code (contains only A–F and 0–9).</string>
-
     <!--Lighting-->
     <string name="lighting">Lighting</string>
     <string name="lightness">Lightness</string>
@@ -61,6 +56,14 @@
     <string name="manual">Manual</string>
     <string name="reset">Reset</string>
     <string name="hex_code">Hex Code</string>
+
+    <!--Change Location-->
+    <string name="change_location">Change Location</string>
+    <string name="location">Location</string>
+    <string name="hex_error_message">Please enter a hex color code (contains only A–F and 0–9).</string>
+
+    <!--Bluetooth-->
+    <string name="bluetooth">Bluetooth</string>
 
     <!--Events-->
     <string name="events">Events</string>

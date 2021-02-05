@@ -15,7 +15,7 @@ class ChangeLocationActivity : InformationBaseActivity() {
         setContentView(R.layout.activity_change_location)
         setUpNavigationBar()
         // Highlights the item in the navigation bar
-        nav_view.setCheckedItem(R.id.nav_change_information)
+        nav_view.setCheckedItem(R.id.nav_location)
         // This is a method in InformationBaseActivity for this in ChangeInformationActivity and InitialSetupActivity
         setupListenersAndEditTexts()
 
