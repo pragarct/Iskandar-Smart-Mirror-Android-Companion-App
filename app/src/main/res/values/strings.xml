@@ -47,6 +47,7 @@
     <!--Change Information-->
     <string name="change_location">Change Location</string>
     <string name="location">Location</string>
+    <string name="hex_error_message">Please enter a hex color code (contains only A–F and 0–9).</string>
 
     <!--Lighting-->
     <string name="lighting">Lighting</string>

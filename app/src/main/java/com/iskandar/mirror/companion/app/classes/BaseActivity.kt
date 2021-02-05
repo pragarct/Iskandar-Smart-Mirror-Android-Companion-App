@@ -114,7 +114,7 @@ open class BaseActivity : AppCompatActivity() {
         val zipCode = "45254"
         val city = "New York"
         val homeAddress = "123 Main Street"
-        val workSchoolAddress = "456 Second"
+        val workSchoolAddress = "456 Second Street"
 
         intent.putExtra("zipCode", zipCode)
         intent.putExtra("city", city)

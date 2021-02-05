@@ -15,11 +15,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".activities.ui.LightingActivity"
+            android:label="@string/lighting">
+        </activity>
+        <activity
             android:name=".activities.ui.events.EventsOverviewActivity"
             android:label="@string/events" />
-        <activity
-            android:name=".activities.ui.LightingActivity"
-            android:label="@string/lighting" />
         <activity android:name=".classes.InformationBaseActivity" />
         <activity
             android:name=".activities.ui.ChangeLocationActivity"
