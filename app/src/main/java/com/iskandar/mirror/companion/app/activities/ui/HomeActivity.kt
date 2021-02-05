@@ -36,7 +36,8 @@ class HomeActivity : BaseActivity() {
             startActivity(intent)
         }
         lighting_button.setOnClickListener {
-            val intent = Intent(this, LightingActivity::class.java)
+            var intent = Intent(this, LightingActivity::class.java)
+            intent = getLightingSettings(intent)
             startActivity(intent)
         }
         events_button.setOnClickListener {

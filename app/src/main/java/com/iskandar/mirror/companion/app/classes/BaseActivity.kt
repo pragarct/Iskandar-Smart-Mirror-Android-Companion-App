@@ -71,7 +71,8 @@ open class BaseActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.nav_lighting -> {
-                    val intent = Intent(this, LightingActivity::class.java)
+                    var intent = Intent(this, LightingActivity::class.java)
+                    intent = getLightingSettings(intent)
                     startActivity(intent)
                 }
                 R.id.nav_events -> {
@@ -94,6 +95,12 @@ open class BaseActivity : AppCompatActivity() {
         intent.putExtra("homeAddress", homeAddress)
         intent.putExtra("workSchoolAddress", workSchoolAddress)
 
+        return intent
+    }
+
+    fun getLightingSettings(intent: Intent): Intent {
+        val color = "#FFA2DC"
+        intent.putExtra("color", color)
         return intent
     }
 
