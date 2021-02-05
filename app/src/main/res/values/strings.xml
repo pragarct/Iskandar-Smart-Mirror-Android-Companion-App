@@ -3,13 +3,13 @@
     <!--    <string name=""></string>   -->
 
     <!--Universal-->
-    <string name="app_name">Iskandar Smart Mirror Companion App</string>
+    <string name="app_name">Iskandar Companion App</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
 
     <!--Activity Names-->
     <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
-    <string name="iskandar_home">Iskandar Home</string>
+    <string name="iskandar_home">Home</string>
 
     <!--TestStart-->
     <string name="normal_start_button">Normal Start</string>
@@ -45,10 +45,16 @@
     <string name="background">Background</string>
 
     <!--Change Information-->
-    <string name="change_information">Change Information</string>
+    <string name="change_location">Change Location</string>
+    <string name="location">Location</string>
 
     <!--Lighting-->
     <string name="lighting">Lighting</string>
+    <string name="lightness">Lightness</string>
+    <string name="brightness">Brightness</string>
+    <string name="manual">Manual</string>
+    <string name="reset">Reset</string>
+    <string name="hex_code">Hex Code</string>
 
     <!--Events-->
     <string name="events">Events</string>
@@ -58,6 +64,6 @@
     <string name="description">You can compute a factorial using the library-kotlin module. The result will be also shown in a notification using the library-android module.</string>
     <string name="factorial_hint">Insert a number to compute his factorial</string>
     <string name="compute">Compute</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_test">Iskandar Companion App</string>
 
 </resources>

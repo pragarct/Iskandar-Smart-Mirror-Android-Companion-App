@@ -27,11 +27,6 @@
             android:title="@string/background" />
 
         <item
-            android:id="@+id/nav_change_information"
-            android:icon="@drawable/ic_info"
-            android:title="@string/change_information" />
-
-        <item
             android:id="@+id/nav_lighting"
             android:icon="@drawable/ic_color"
             android:title="@string/lighting" />
@@ -40,5 +35,10 @@
             android:id="@+id/nav_events"
             android:icon="@drawable/ic_events"
             android:title="@string/events" />
+
+        <item
+            android:id="@+id/nav_change_information"
+            android:icon="@drawable/ic_map"
+            android:title="@string/location" />
     </group>
 </menu>

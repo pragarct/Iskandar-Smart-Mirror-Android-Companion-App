@@ -3,28 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.iskandar.mirror.companion.app">
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
-    <!-- If your app targets Android 9 or lower, you can declare
-         ACCESS_COARSE_LOCATION instead. -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.ui.events.EventsOverviewActivity"
+            android:label="@string/events" />
+        <activity
+            android:name=".activities.ui.LightingActivity"
+            android:label="@string/lighting" />
+        <activity android:name=".classes.InformationBaseActivity" />
+        <activity
+            android:name=".activities.ui.ChangeLocationActivity"
+            android:label="@string/change_location" />
+        <activity
+            android:name=".activities.ui.BackgroundOverviewActivity"
+            android:label="@string/background" />
+        <activity
+            android:name=".activities.ui.reminders.RemindersOverviewActivity"
+            android:label="@string/reminders" />
+        <activity
+            android:name=".activities.ui.alarms.AlarmOverviewActivity"
+            android:label="@string/alarms" />
+        <activity
+            android:name=".activities.ui.InitialSetupActivity"
+            android:label="@string/iskandar_initial_setup" />
+        <activity
+            android:name=".activities.ui.HomeActivity"
+            android:label="@string/iskandar_home" />
+        <activity
+            android:name=".activities.ui.TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ui.OldMainActivity" />
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
-import com.iskandar.mirror.companion.app.activities.ui.ChangeInformationActivity
+import com.iskandar.mirror.companion.app.activities.ui.ChangeLocationActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
 import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
@@ -54,28 +54,33 @@ open class BaseActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.nav_alarms -> {
-                    val intent = Intent(this, AlarmOverviewActivity::class.java)
+                    var intent = Intent(this, AlarmOverviewActivity::class.java)
+                    intent = getAlarms(intent)
                     startActivity(intent)
                 }
                 R.id.nav_reminders -> {
-                    val intent = Intent(this, RemindersOverviewActivity::class.java)
+                    var intent = Intent(this, RemindersOverviewActivity::class.java)
+                    intent = getReminders(intent)
                     startActivity(intent)
                 }
                 R.id.nav_background -> {
-                    val intent = Intent(this, BackgroundOverviewActivity::class.java)
-                    startActivity(intent)
-                }
-                R.id.nav_change_information -> {
-                    var intent = Intent(this, ChangeInformationActivity::class.java)
-                    intent = getWeatherAndTrafficInformation(intent)
+                    var intent = Intent(this, BackgroundOverviewActivity::class.java)
+                    intent = getBackgroundImage(intent)
                     startActivity(intent)
                 }
                 R.id.nav_lighting -> {
-                    val intent = Intent(this, LightingActivity::class.java)
+                    var intent = Intent(this, LightingActivity::class.java)
+                    intent = getLightingSettings(intent)
                     startActivity(intent)
                 }
                 R.id.nav_events -> {
-                    val intent = Intent(this, EventsOverviewActivity::class.java)
+                    var intent = Intent(this, EventsOverviewActivity::class.java)
+                    intent = getEvents(intent)
+                    startActivity(intent)
+                }
+                R.id.nav_change_information -> {
+                    var intent = Intent(this, ChangeLocationActivity::class.java)
+                    intent = getWeatherAndTrafficInformation(intent)
                     startActivity(intent)
                 }
             }
@@ -83,11 +88,33 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    fun getAlarms(intent: Intent): Intent {
+        return intent
+    }
+
+    fun getReminders(intent: Intent): Intent {
+        return intent
+    }
+
+    fun getBackgroundImage(intent: Intent): Intent {
+        return intent
+    }
+
+    fun getLightingSettings(intent: Intent): Intent {
+        val color = "#FFA2DC"
+        intent.putExtra("color", color)
+        return intent
+    }
+
+    fun getEvents(intent: Intent): Intent {
+        return intent
+    }
+
     fun getWeatherAndTrafficInformation(intent: Intent): Intent {
-        val zipCode = "45233"
-        val city = "Cincinnati"
-        val homeAddress = "858 Braemore Lane"
-        val workSchoolAddress = "4900 Waterstone Boulevard"
+        val zipCode = "45254"
+        val city = "New York"
+        val homeAddress = "123 Main Street"
+        val workSchoolAddress = "456 Second"
 
         intent.putExtra("zipCode", zipCode)
         intent.putExtra("city", city)

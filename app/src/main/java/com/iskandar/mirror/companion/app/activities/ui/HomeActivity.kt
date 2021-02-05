@@ -19,28 +19,33 @@ class HomeActivity : BaseActivity() {
 
         // Set up listeners for tile buttons
         alarms_button.setOnClickListener {
-            val intent = Intent(this, AlarmOverviewActivity::class.java)
+            var intent = Intent(this, AlarmOverviewActivity::class.java)
+            intent = getAlarms(intent)
             startActivity(intent)
         }
         reminders_button.setOnClickListener {
-            val intent = Intent(this, RemindersOverviewActivity::class.java)
+            var intent = Intent(this, RemindersOverviewActivity::class.java)
+            intent = getReminders(intent)
             startActivity(intent)
         }
         background_button.setOnClickListener {
-            val intent = Intent(this, BackgroundOverviewActivity::class.java)
-            startActivity(intent)
-        }
-        change_information_button.setOnClickListener {
-            var intent = Intent(this, ChangeInformationActivity::class.java)
-            intent = getWeatherAndTrafficInformation(intent)
+            var intent = Intent(this, BackgroundOverviewActivity::class.java)
+            intent = getBackgroundImage(intent)
             startActivity(intent)
         }
         lighting_button.setOnClickListener {
-            val intent = Intent(this, LightingActivity::class.java)
+            var intent = Intent(this, LightingActivity::class.java)
+            intent = getLightingSettings(intent)
             startActivity(intent)
         }
         events_button.setOnClickListener {
-            val intent = Intent(this, EventsOverviewActivity::class.java)
+            var intent = Intent(this, EventsOverviewActivity::class.java)
+            intent = getEvents(intent)
+            startActivity(intent)
+        }
+        change_information_button.setOnClickListener {
+            var intent = Intent(this, ChangeLocationActivity::class.java)
+            intent = getWeatherAndTrafficInformation(intent)
             startActivity(intent)
         }
     }

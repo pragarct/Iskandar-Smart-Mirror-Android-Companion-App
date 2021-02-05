@@ -3,16 +3,16 @@ package com.iskandar.mirror.companion.app.activities.ui
 import android.os.Bundle
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.InformationBaseActivity
-import kotlinx.android.synthetic.main.activity_change_information.*
+import kotlinx.android.synthetic.main.activity_change_location.*
 import kotlinx.android.synthetic.main.activity_initial_setup.cityEditText
 import kotlinx.android.synthetic.main.activity_initial_setup.homeAddressEditText
 import kotlinx.android.synthetic.main.activity_initial_setup.workSchoolAddressEditText
 import kotlinx.android.synthetic.main.activity_initial_setup.zipCodeEditText
 
-class ChangeInformationActivity : InformationBaseActivity() {
+class ChangeLocationActivity : InformationBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_information)
+        setContentView(R.layout.activity_change_location)
         setUpNavigationBar()
         // Highlights the item in the navigation bar
         nav_view.setCheckedItem(R.id.nav_change_information)
