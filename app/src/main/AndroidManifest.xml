@@ -22,8 +22,8 @@
             android:label="@string/lighting" />
         <activity android:name=".classes.InformationBaseActivity" />
         <activity
-            android:name=".activities.ui.ChangeInformationActivity"
-            android:label="@string/change_information" />
+            android:name=".activities.ui.ChangeLocationActivity"
+            android:label="@string/change_location" />
         <activity
             android:name=".activities.ui.BackgroundOverviewActivity"
             android:label="@string/background" />
