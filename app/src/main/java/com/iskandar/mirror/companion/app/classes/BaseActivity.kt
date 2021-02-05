@@ -111,10 +111,10 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun getWeatherAndTrafficInformation(intent: Intent): Intent {
-        val zipCode = "45233"
-        val city = "Cincinnati"
-        val homeAddress = "858 Braemore Lane"
-        val workSchoolAddress = "4900 Waterstone Boulevard"
+        val zipCode = "45254"
+        val city = "New York"
+        val homeAddress = "123 Main Street"
+        val workSchoolAddress = "456 Second"
 
         intent.putExtra("zipCode", zipCode)
         intent.putExtra("city", city)
