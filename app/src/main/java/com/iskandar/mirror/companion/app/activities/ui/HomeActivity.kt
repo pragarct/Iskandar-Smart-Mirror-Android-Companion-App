@@ -8,6 +8,7 @@ import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActi
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.nav_view
 
 class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +45,8 @@ class HomeActivity : BaseActivity() {
             startActivity(intent)
         }
         change_information_button.setOnClickListener {
-            var intent = Intent(this, ChangeLocationActivity::class.java)
-            intent = getWeatherAndTrafficInformation(intent)
-            startActivity(intent)
+            val intent = Intent(this, ChangeLocationActivity::class.java)
+            getWeatherAndTrafficInformation(intent)
         }
         bluetooth_button.setOnClickListener {
             var intent = Intent(this, BluetoothActivity::class.java)

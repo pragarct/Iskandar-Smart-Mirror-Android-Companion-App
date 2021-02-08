@@ -65,6 +65,10 @@
     <!--Bluetooth-->
     <string name="bluetooth">Bluetooth</string>
 
+    <!--Rest-->
+    <string name="rest_put_error">Could not send information to Iskandar.  Please try again.</string>
+    <string name="rest_get_error">Could not load information from Iskandar.  Please try again.</string>
+
     <!--Events-->
     <string name="events">Events</string>
 

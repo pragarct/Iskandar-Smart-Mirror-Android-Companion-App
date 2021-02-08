@@ -3,15 +3,20 @@ package com.iskandar.mirror.companion.app.classes
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.android.volley.toolbox.RequestFuture
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.BluetoothActivity
@@ -22,21 +27,12 @@ import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActiv
 import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.doAsync
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 open class BaseActivity : AppCompatActivity() {
-
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
-        setSupportActionBar(findViewById(R.id.toolbar))
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-    }*/
 
     // Navigation Bar
     lateinit var toggle: ActionBarDrawerToggle
@@ -80,9 +76,8 @@ open class BaseActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.nav_location -> {
-                    var intent = Intent(this, ChangeLocationActivity::class.java)
-                    intent = getWeatherAndTrafficInformation(intent)
-                    startActivity(intent)
+                    val intent = Intent(this, ChangeLocationActivity::class.java)
+                    getWeatherAndTrafficInformation(intent)
                 }
                 R.id.nav_bluetooth -> {
                     var intent = Intent(this, BluetoothActivity::class.java)
@@ -116,19 +111,101 @@ open class BaseActivity : AppCompatActivity() {
         return intent
     }
 
-    fun getWeatherAndTrafficInformation(intent: Intent): Intent {
-        val zipCode = "45254"
-        val city = "New York"
-        val homeAddress = "123 Main Street"
-        val workSchoolAddress = "456 Second Street"
+    fun getWeatherAndTrafficInformation(intent: Intent) {
+        val context = this
 
-        intent.putExtra("zipCode", zipCode)
-        intent.putExtra("city", city)
-        intent.putExtra("homeAddress", homeAddress)
-        intent.putExtra("workSchoolAddress", workSchoolAddress)
+        doAsync {
+            // Instantiate the RequestQueue.
+            val queue = Volley.newRequestQueue(context)
+            val weatherUrl = "http://10.0.2.2:5000/weather"
 
-        return intent
+            val future1 = RequestFuture.newFuture<String>()
+            val weatherStringRequest = StringRequest(weatherUrl, future1, future1)
+            queue.add(weatherStringRequest)
+
+            try {
+                val response = future1.get(500, TimeUnit.MILLISECONDS) // this will block
+                val splitResponse = response.toString().split("\"", ",")
+                intent.putExtra("zipCode", splitResponse[2].substring(2))
+                intent.putExtra("city", splitResponse[6])
+            } catch (e: InterruptedException) {
+                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+            } catch (e: ExecutionException) {
+                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+            } catch (e: TimeoutException) {
+                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                Log.d("Response", "WEATHER TIMEOUT")
+            }
+
+            // Add the request to the RequestQueue.
+            queue.add(weatherStringRequest)
+
+            val trafficUrl = "http://10.0.2.2:5000/traffic"
+
+            val future2 = RequestFuture.newFuture<String>()
+            val trafficStringRequest = StringRequest(trafficUrl, future2, future2)
+            queue.add(trafficStringRequest)
+
+            try {
+                val response = future2.get(500, TimeUnit.MILLISECONDS) // this will block
+                val splitResponse = response.toString().split("\"", ",")
+                intent.putExtra("homeAddress", splitResponse[3])
+                intent.putExtra("workSchoolAddress", splitResponse[8])
+                startActivity(intent)
+            } catch (e: InterruptedException) {
+                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+            } catch (e: ExecutionException) {
+                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+            } catch (e: TimeoutException) {
+                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                Log.d("Response", "TRAFFIC TIMEOUT")
+            }
+        }
     }
+
+    /*fun getWeatherInformation(): Intent {
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://10.0.2.2:5000/weather"
+
+        // Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET,
+            url,
+            { response ->
+                val splitResponse = response.toString().split("\"", ",")
+                zipCodeEditText.setText(splitResponse[2].substring(2))
+                cityEditText.setText(splitResponse[6])
+                this.intent
+            },
+            { Toast.makeText(this, R.string.rest_error, Toast.LENGTH_LONG).show() }
+        )
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest)
+    }
+
+    fun getTrafficInformation(): Intent {
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://10.0.2.2:5000/traffic"
+
+        // Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET,
+            url,
+            { response ->
+                val splitResponse = response.toString().split("\"", ",")
+                intent.putExtra("zipCode", splitResponse[2].substring(2))
+                intent.putExtra("city", splitResponse[6])
+                return intent
+            },
+            { Toast.makeText(this, R.string.rest_error, Toast.LENGTH_LONG).show() }
+        )
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest)
+    }*/
 
     fun getBluetoothInformation(intent: Intent): Intent {
         return intent
@@ -148,10 +225,10 @@ open class BaseActivity : AppCompatActivity() {
         val view = currentFocus
         if (view != null && (ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE)) {
             if (view is EditText && !view.javaClass.name.startsWith("android.webkit.")) {
-                val scrcoords = IntArray(2)
-                view.getLocationOnScreen(scrcoords)
-                val x = ev.rawX + view.getLeft() - scrcoords[0]
-                val y = ev.rawY + view.getTop() - scrcoords[1]
+                val scrCoords = IntArray(2)
+                view.getLocationOnScreen(scrCoords)
+                val x = ev.rawX + view.getLeft() - scrCoords[0]
+                val y = ev.rawY + view.getTop() - scrCoords[1]
 
                 if (x < view.getLeft() || x > view.getRight()) {
                     (this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
@@ -172,14 +249,6 @@ open class BaseActivity : AppCompatActivity() {
 
         return super.dispatchTouchEvent(ev)
     }
-
-    // Close the keyboard when screen is touched (NEED TO LOSE FOCUS TOO)
-    /*override fun onTouchEvent(event: MotionEvent): Boolean {
-        // Close the keyboard on screen press
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-        return true
-    }*/
 
     fun Fragment.hideKeyboard() {
         view?.let { activity?.hideKeyboard(it) }

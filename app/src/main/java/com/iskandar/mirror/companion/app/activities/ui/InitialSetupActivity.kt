@@ -8,7 +8,7 @@ class InitialSetupActivity : InformationBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_initial_setup)
-        // This is a method in InformationBaseActivity for this in ChangeInformationActivity and InitialSetupActivity
+        // This is a method in InformationBaseActivity used also in ChangeInformationActivity
         setupListenersAndEditTexts()
     }
 }

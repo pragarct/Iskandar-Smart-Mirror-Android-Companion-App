@@ -4,10 +4,6 @@ import android.os.Bundle
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.InformationBaseActivity
 import kotlinx.android.synthetic.main.activity_change_location.*
-import kotlinx.android.synthetic.main.activity_initial_setup.cityEditText
-import kotlinx.android.synthetic.main.activity_initial_setup.homeAddressEditText
-import kotlinx.android.synthetic.main.activity_initial_setup.workSchoolAddressEditText
-import kotlinx.android.synthetic.main.activity_initial_setup.zipCodeEditText
 
 class ChangeLocationActivity : InformationBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +12,7 @@ class ChangeLocationActivity : InformationBaseActivity() {
         setUpNavigationBar()
         // Highlights the item in the navigation bar
         nav_view.setCheckedItem(R.id.nav_location)
-        // This is a method in InformationBaseActivity for this in ChangeInformationActivity and InitialSetupActivity
+        // This is a method in InformationBaseActivity used also in InitialSetupActivity
         setupListenersAndEditTexts()
 
         val zipCode: String? = intent.extras?.getString("zipCode")
@@ -32,9 +28,6 @@ class ChangeLocationActivity : InformationBaseActivity() {
             cityEditText.setText(city)
             homeAddressEditText.setText(homeAddress)
             workSchoolAddressEditText.setText(workSchoolAddress)
-
-            // Set up Navigation Bar
-            setUpNavigationBar()
         }
     }
 }

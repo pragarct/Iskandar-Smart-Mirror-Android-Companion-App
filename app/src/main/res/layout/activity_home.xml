@@ -8,6 +8,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -42,6 +43,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/alarms_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -50,13 +52,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_alarm"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/alarms_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_alarm"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/alarms_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/alarms"
@@ -83,6 +87,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/reminders_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -91,13 +96,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_reminders"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/reminders_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_reminders"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/reminders_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/reminders"
@@ -127,6 +134,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/background_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -135,13 +143,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_image"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/background_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_image"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/background_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/background"
@@ -169,6 +179,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/lighting_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -177,13 +188,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_color"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/lighting_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_color"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/lighting_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/lighting"
@@ -213,6 +226,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/events_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -221,14 +235,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_events"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/events_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_events"
                         tools:ignore="ContentDescription" />
 
                     <TextView
-                        android:id="@+id/alarms_textView"
+                        android:id="@+id/events_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/events"
@@ -255,6 +270,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/change_information_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -263,13 +279,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_map"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/change_information_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_map"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/change_information_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/location"
@@ -295,6 +313,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/bluetooth_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -303,13 +322,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_bluetooth"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/bluetooth_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_bluetooth"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/bluetooth_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/bluetooth"
@@ -323,6 +344,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/info_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
@@ -334,6 +356,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/info_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -342,13 +365,15 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_info"
-                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/info_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_info"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/info_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/home"
@@ -362,7 +387,6 @@
             </androidx.cardview.widget.CardView>
 
         </GridLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

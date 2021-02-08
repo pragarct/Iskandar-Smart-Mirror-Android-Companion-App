@@ -57,6 +57,8 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     implementation("com.github.QuadFlask:colorpicker:0.0.15")
+    implementation("com.android.volley:volley:1.1.1")
+    implementation("org.jetbrains.anko:anko-common:0.9")
 
     testImplementation(TestingLib.JUNIT)
 
