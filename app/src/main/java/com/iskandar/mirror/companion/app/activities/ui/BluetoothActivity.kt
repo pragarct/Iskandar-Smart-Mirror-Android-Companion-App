@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_change_location.*
@@ -27,7 +28,10 @@ class BluetoothActivity : BaseActivity() {
 
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
         val listView = findViewById<ListView>(R.id.lv_visible)
+        val discDev = findViewById<TextView>(R.id.discDev)
         val btnVisible = findViewById<Button>(R.id.btn_visible)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
+
         btnVisible.setOnClickListener() {
             // find devices that have already been bonded to
             val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
@@ -36,7 +40,8 @@ class BluetoothActivity : BaseActivity() {
                 addresses.add(device.address)
             }
 
-            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
+            discDev.visibility=TextView.VISIBLE
+
             listView.adapter = adapter
         }
 
