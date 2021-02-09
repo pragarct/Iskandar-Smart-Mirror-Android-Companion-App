@@ -40,7 +40,7 @@ class BluetoothActivity : BaseActivity() {
                 addresses.add(device.address)
             }
 
-            discDev.visibility=TextView.VISIBLE
+            discDev.visibility = TextView.VISIBLE
 
             listView.adapter = adapter
         }
