@@ -18,6 +18,8 @@ class HomeActivity : BaseActivity() {
         // Highlights the item in the navigation bar
         nav_view.setCheckedItem(R.id.nav_home)
 
+        // This is a test commit, no actual changes
+
         // Set up listeners for tile buttons
         alarms_button.setOnClickListener {
             var intent = Intent(this, AlarmOverviewActivity::class.java)
