@@ -70,9 +70,7 @@ open class InformationBaseActivity : BaseActivity() {
             // Data is valid, open up Home Activity
             if (initialDataIsValid) {
                 val intent = Intent(this, HomeActivity::class.java)
-                postWeatherInformation()
-                postTrafficInformation()
-                startActivity(intent)
+                putWeatherAndTrafficInformation(intent)
             }
 
             initialDataIsValid = true
@@ -91,21 +89,26 @@ open class InformationBaseActivity : BaseActivity() {
 
             val future1 = RequestFuture.newFuture<String>()
             val weatherStringRequest = StringRequest(Request.Method.PUT, weatherUrl, future1, future1)
+            // Add the request to the RequestQueue.
+            queue.add(weatherStringRequest)
 
             try {
                 val response = future1.get(500, TimeUnit.MILLISECONDS) // this will block
                 Log.d("Response", response)
             } catch (e: InterruptedException) {
-                Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: ExecutionException) {
-                Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: TimeoutException) {
-                Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
                 Log.d("Response", "WEATHER TIMEOUT")
             }
-
-            // Add the request to the RequestQueue.
-            queue.add(weatherStringRequest)
 
             val trafficUrl = "http://10.0.2.2:5000/traffic?home_address=" +
                 homeAddressEditText.text.toString() + "&work_or_school_address=" +
@@ -113,104 +116,27 @@ open class InformationBaseActivity : BaseActivity() {
 
             val future2 = RequestFuture.newFuture<String>()
             val trafficStringRequest = StringRequest(Request.Method.PUT, trafficUrl, future2, future2)
+            // Add the request to the RequestQueue.
+            queue.add(trafficStringRequest)
 
             try {
                 val response = future2.get(500, TimeUnit.MILLISECONDS) // this will block
                 Log.d("Response", response)
                 startActivity(intent)
             } catch (e: InterruptedException) {
-                Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: ExecutionException) {
-                Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: TimeoutException) {
-                Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
                 Log.d("Response", "TRAFFIC TIMEOUT")
             }
-
-            queue.add(trafficStringRequest)
         }
-    }
-
-    private fun putWeatherAndTrafficInformation() {
-        // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
-        val weatherUrl = "http://10.0.2.2:5000/weather?city=" +
-            cityEditText.text.toString() + "&zip_code=" +
-            zipCodeEditText.text.toString()
-
-        // Request a string response from the provided URL.
-        val weatherStringRequest = StringRequest(
-            Request.Method.PUT,
-            weatherUrl,
-            {
-                response ->
-                Log.d("Response", response)
-            },
-            { Toast.makeText(this, R.string.rest_put_error, Toast.LENGTH_LONG).show() }
-        )
-
-        // Add the request to the RequestQueue.
-        queue.add(weatherStringRequest)
-
-        val trafficUrl = "http://10.0.2.2:5000/traffic?home_address=" +
-            homeAddressEditText.text.toString() + "&work_or_school_address=" +
-            workSchoolAddressEditText.text.toString()
-
-        // Request a string response from the provided URL.
-        val trafficStringRequest = StringRequest(
-            Request.Method.PUT,
-            trafficUrl,
-            { response ->
-                Log.d("Response", response)
-            },
-            { Toast.makeText(this, R.string.rest_put_error, Toast.LENGTH_LONG).show() }
-        )
-
-        // Add the request to the RequestQueue.
-        queue.add(trafficStringRequest)
-    }
-
-    fun postWeatherInformation() {
-        // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
-        val url = "http://10.0.2.2:5000/weather?city=" +
-            cityEditText.text.toString() + "&zip_code=" +
-            zipCodeEditText.text.toString()
-
-        // Request a string response from the provided URL.
-        val stringRequest = StringRequest(
-            Request.Method.PUT,
-            url,
-            {
-                response ->
-                Log.d("Response", response)
-            },
-            { Toast.makeText(this, R.string.rest_put_error, Toast.LENGTH_LONG).show() }
-        )
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest)
-    }
-
-    fun postTrafficInformation() {
-        // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
-        val url = "http://10.0.2.2:5000/traffic?home_address=" +
-            homeAddressEditText.text.toString() + "&work_or_school_address=" +
-            workSchoolAddressEditText.text.toString()
-
-        // Request a string response from the provided URL.
-        val stringRequest = StringRequest(
-            Request.Method.PUT,
-            url,
-            {
-                response ->
-                Log.d("Response", response)
-            },
-            { Toast.makeText(this, R.string.rest_put_error, Toast.LENGTH_LONG).show() }
-        )
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest)
     }
 }

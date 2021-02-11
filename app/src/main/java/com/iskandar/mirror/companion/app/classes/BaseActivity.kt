@@ -14,6 +14,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -28,6 +30,8 @@ import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActi
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.doAsync
+import org.json.JSONObject
+import java.util.Locale
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
@@ -66,9 +70,8 @@ open class BaseActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.nav_lighting -> {
-                    var intent = Intent(this, LightingActivity::class.java)
-                    intent = getLightingSettings(intent)
-                    startActivity(intent)
+                    val intent = Intent(this, LightingActivity::class.java)
+                    getLightingSettings(intent)
                 }
                 R.id.nav_events -> {
                     var intent = Intent(this, EventsOverviewActivity::class.java)
@@ -89,6 +92,15 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+    // End Navigation Bar
+
     fun getAlarms(intent: Intent): Intent {
         return intent
     }
@@ -101,10 +113,52 @@ open class BaseActivity : AppCompatActivity() {
         return intent
     }
 
-    fun getLightingSettings(intent: Intent): Intent {
-        val color = "#FFA2DC"
-        intent.putExtra("color", color)
-        return intent
+    fun getLightingSettings(intent: Intent) {
+        // val color = "#FFA2DC"
+        // intent.putExtra("color", color)
+        // return intent
+
+        val context = this
+
+        doAsync {
+            // Instantiate the RequestQueue.
+            val queue = Volley.newRequestQueue(context)
+            val url = "http://10.0.2.2:5000/lighting"
+
+            val future = RequestFuture.newFuture<JSONObject>()
+            val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, JSONObject(), future, future)
+            // Add the request to the RequestQueue.
+            queue.add(jsonObjectRequest)
+
+            try {
+                val response = future.get(500, TimeUnit.MILLISECONDS) // this will block
+
+                val red = response.get("red")
+                val green = response.get("green")
+                val blue = response.get("blue")
+                val brightness = response.get("brightness")
+
+                var hex = java.lang.String.format("#%02x%02x%02x", red, green, blue)
+                hex = hex.toUpperCase(Locale.ROOT)
+
+                intent.putExtra("color", hex)
+                intent.putExtra("brightness", brightness.toString())
+                startActivity(intent)
+            } catch (e: InterruptedException) {
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
+            } catch (e: ExecutionException) {
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
+            } catch (e: TimeoutException) {
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
+                Log.d("Response", "LIGHTING TIMEOUT")
+            }
+        }
     }
 
     fun getEvents(intent: Intent): Intent {
@@ -121,6 +175,7 @@ open class BaseActivity : AppCompatActivity() {
 
             val future1 = RequestFuture.newFuture<String>()
             val weatherStringRequest = StringRequest(weatherUrl, future1, future1)
+            // Add the request to the RequestQueue.
             queue.add(weatherStringRequest)
 
             try {
@@ -129,16 +184,19 @@ open class BaseActivity : AppCompatActivity() {
                 intent.putExtra("zipCode", splitResponse[2].substring(2))
                 intent.putExtra("city", splitResponse[6])
             } catch (e: InterruptedException) {
-                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: ExecutionException) {
-                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: TimeoutException) {
-                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
                 Log.d("Response", "WEATHER TIMEOUT")
             }
-
-            // Add the request to the RequestQueue.
-            queue.add(weatherStringRequest)
 
             val trafficUrl = "http://10.0.2.2:5000/traffic"
 
@@ -153,11 +211,17 @@ open class BaseActivity : AppCompatActivity() {
                 intent.putExtra("workSchoolAddress", splitResponse[8])
                 startActivity(intent)
             } catch (e: InterruptedException) {
-                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: ExecutionException) {
-                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
             } catch (e: TimeoutException) {
-                Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                }
                 Log.d("Response", "TRAFFIC TIMEOUT")
             }
         }
@@ -210,15 +274,6 @@ open class BaseActivity : AppCompatActivity() {
     fun getBluetoothInformation(intent: Intent): Intent {
         return intent
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-    // End Navigation Bar
 
     // Close the keyboard on button/screen press and clear focus
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

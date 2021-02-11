@@ -1,20 +1,35 @@
 package com.iskandar.mirror.companion.app.activities.ui
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.alpha
 import androidx.core.widget.addTextChangedListener
+import com.android.volley.Request
+import com.android.volley.toolbox.RequestFuture
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import com.iskandar.mirror.companion.app.classes.makeClearableEditText
 import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
 import kotlinx.android.synthetic.main.activity_lighting.*
+import org.jetbrains.anko.doAsync
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 var previousColor: String = "#FFFFFF"
+var previousBrightness: Float = 100f
+var justStarted = true
 
 class LightingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +78,6 @@ class LightingActivity : BaseActivity() {
             val color = "#" + hexCodeEditText.text.toString()
 
             // Set background to transparent
-            // manualButton.setBackgroundColor(0x00000000)
             manualButton.backgroundTintList = generateColorStateList(Color.LTGRAY)
             manualButton.setTextColor(Color.BLACK)
 
@@ -81,24 +95,7 @@ class LightingActivity : BaseActivity() {
 
         // Submit button - when pressed, a popup appears asking to confirm the color
         submitButton.setOnClickListener {
-            // build alert dialog
-            val dialogBuilder = AlertDialog.Builder(this)
-
-            // set message of alert dialog
-            dialogBuilder.setMessage("Do you want to keep this color?")
-                // if the dialog is cancelable
-                .setCancelable(false)
-                // positive button text and action
-                .setPositiveButton("Keep Color") { _, _ -> finish() }
-                // negative button text and action
-                .setNegativeButton("Choose New Color") { dialog, _ -> dialog.cancel() }
-
-            // create dialog box
-            val alert = dialogBuilder.create()
-            // set title for alert dialog box
-            alert.setTitle("Color Confirmation")
-            // show alert dialog
-            alert.show()
+            putLightingInformation(this)
         }
 
         // Get the previous/current color from intent
@@ -108,26 +105,104 @@ class LightingActivity : BaseActivity() {
         // Change reset button text to complimentary color
         resetButton.setTextColor(getComplementaryColor(Color.parseColor(previousColor)))
 
-        // Set the current color to the one previously selected
-        lightnessSlider.setColor(Color.parseColor(previousColor))
+        // Get the previous/current brightness from intent
+        val brightnessString: String = "0" + intent.extras?.getString("brightness")
+        previousBrightness = brightnessString.toFloat()
 
         // Reset button - when pressed, change color to previously selected color
         resetButton.setOnClickListener {
-            colorPickerView.setColor(Color.parseColor(previousColor), false)
-
-            // Change hex edit text to previous color selected
-            val color = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
-            hexCodeEditText.setText(color)
-
+            setDefaultValues()
             // Change submit button background to selected color
             submitButton.backgroundTintList = generateColorStateList(colorPickerView.selectedColor)
             // Change submit button text to complimentary color
             submitButton.setTextColor(getComplementaryColor(colorPickerView.selectedColor))
         }
 
-        // Retrieve initial color
-        val color: String? = intent.extras?.getString("color")
-        colorPickerView.setColor(Color.parseColor(color), false)
+        // This is necessary, otherwise the brightness (alpha) slider is not initialized
+        drawer_layout.viewTreeObserver.addOnGlobalLayoutListener {
+            if (justStarted) {
+                setDefaultValues()
+                justStarted = false
+            }
+        }
+    }
+
+    private fun setDefaultValues() {
+        // Set the current color to the one previously selected
+        colorPickerView.setColor(Color.parseColor(previousColor), false)
+        // Set the lightness to the one previously selected
+        lightnessSlider.setColor(Color.parseColor(previousColor))
+        // Set the current brightness to the one previously selected
+        colorPickerView.setAlphaValue(previousBrightness)
+        colorPickerView.setAlphaSlider(alphaSlider)
+
+        // Change hex edit text to previous color selected
+        val color = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
+        hexCodeEditText.setText(color)
+    }
+
+    private fun putLightingInformation(context: Context) {
+        // val context = this
+
+        doAsync {
+            // Convert to hex
+            val hexColor = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
+            // val color = "#$hexColor"
+            // val color = Color.parseColor("#$hexColor")
+            val brightness = (colorPickerView.selectedColor.alpha / 2.55).toInt()
+
+            // Instantiate the RequestQueue.
+            val queue = Volley.newRequestQueue(context)
+            val url = "http://10.0.2.2:5000/lighting?rgb=$hexColor&brightness=$brightness"
+
+            val future = RequestFuture.newFuture<String>()
+            val stringRequest = StringRequest(Request.Method.PUT, url, future, future)
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest)
+
+            try {
+                val response = future.get(5000, TimeUnit.MILLISECONDS) // this will block
+                Log.d("Response", response)
+
+                // build alert dialog
+                runOnUiThread {
+                    val dialogBuilder = AlertDialog.Builder(context)
+
+                    // set message of alert dialog
+                    dialogBuilder.setMessage("Do you want to keep this color?")
+                        // if the dialog is cancelable
+                        .setCancelable(false)
+                        // positive button text and action
+                        .setPositiveButton("Keep Color") { _, _ ->
+                            val intent = Intent(context, HomeActivity::class.java)
+                            startActivity(intent)
+                        }
+                        // negative button text and action
+                        .setNegativeButton("Choose New Color") { dialog, _ -> dialog.cancel() }
+
+                    // create dialog box
+                    val alert = dialogBuilder.create()
+                    // set title for alert dialog box
+                    alert.setTitle("Color Confirmation")
+                    // show alert dialog
+                    alert.show()
+                }
+            } catch (e: InterruptedException) {
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
+                // Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+            } catch (e: ExecutionException) {
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
+            } catch (e: TimeoutException) {
+                runOnUiThread {
+                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
+                }
+                Log.d("Response", "LIGHTING TIMEOUT")
+            }
+        }
     }
 
     private fun isHexColorCode(color: String): Boolean {
