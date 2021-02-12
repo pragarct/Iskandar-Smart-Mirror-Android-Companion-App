@@ -83,7 +83,7 @@ open class InformationBaseActivity : BaseActivity() {
         doAsync {
             // Instantiate the RequestQueue.
             val queue = Volley.newRequestQueue(context)
-            val weatherUrl = "http://10.0.2.2:5000/weather?city=" +
+            val weatherUrl = getString(R.string.server_url) + "weather?city=" +
                 cityEditText.text.toString() + "&zip_code=" +
                 zipCodeEditText.text.toString()
 
@@ -110,7 +110,7 @@ open class InformationBaseActivity : BaseActivity() {
                 Log.d("Response", "WEATHER TIMEOUT")
             }
 
-            val trafficUrl = "http://10.0.2.2:5000/traffic?home_address=" +
+            val trafficUrl = getString(R.string.server_url) + "traffic?home_address=" +
                 homeAddressEditText.text.toString() + "&work_or_school_address=" +
                 workSchoolAddressEditText.text.toString()
 

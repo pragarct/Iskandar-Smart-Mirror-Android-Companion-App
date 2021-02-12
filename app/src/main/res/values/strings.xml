@@ -69,6 +69,11 @@
     <string name="rest_get_error">Could not load information from Iskandar.  Please try again.</string>
     <string name="rest_put_error">Could not send information to Iskandar.  Please try again.</string>
 
+    <!--Emulator URL-->
+    <string name="server_url">http://10.0.2.2:5000/</string>
+    <!--Phone URL-->
+    <!--<string name="server_url">localhost:5000/</string>-->
+
     <!--Events-->
     <string name="events">Events</string>
 

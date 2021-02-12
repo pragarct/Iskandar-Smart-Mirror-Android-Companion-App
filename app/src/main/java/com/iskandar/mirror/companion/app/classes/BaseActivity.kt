@@ -123,7 +123,7 @@ open class BaseActivity : AppCompatActivity() {
         doAsync {
             // Instantiate the RequestQueue.
             val queue = Volley.newRequestQueue(context)
-            val url = "http://10.0.2.2:5000/lighting"
+            val url = getString(R.string.server_url) + "lighting"
 
             val future = RequestFuture.newFuture<JSONObject>()
             val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, JSONObject(), future, future)
@@ -171,7 +171,7 @@ open class BaseActivity : AppCompatActivity() {
         doAsync {
             // Instantiate the RequestQueue.
             val queue = Volley.newRequestQueue(context)
-            val weatherUrl = "http://10.0.2.2:5000/weather"
+            val weatherUrl = getString(R.string.server_url) + "weather"
 
             val future1 = RequestFuture.newFuture<String>()
             val weatherStringRequest = StringRequest(weatherUrl, future1, future1)
@@ -198,7 +198,7 @@ open class BaseActivity : AppCompatActivity() {
                 Log.d("Response", "WEATHER TIMEOUT")
             }
 
-            val trafficUrl = "http://10.0.2.2:5000/traffic"
+            val trafficUrl = getString(R.string.server_url) + "traffic"
 
             val future2 = RequestFuture.newFuture<String>()
             val trafficStringRequest = StringRequest(trafficUrl, future2, future2)

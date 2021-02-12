@@ -126,6 +126,11 @@ class LightingActivity : BaseActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        justStarted = true
+    }
+
     private fun setDefaultValues() {
         // Set the current color to the one previously selected
         colorPickerView.setColor(Color.parseColor(previousColor), false)
@@ -152,7 +157,7 @@ class LightingActivity : BaseActivity() {
 
             // Instantiate the RequestQueue.
             val queue = Volley.newRequestQueue(context)
-            val url = "http://10.0.2.2:5000/lighting?rgb=$hexColor&brightness=$brightness"
+            val url = getString(R.string.server_url) + "lighting?rgb=$hexColor&brightness=$brightness"
 
             val future = RequestFuture.newFuture<String>()
             val stringRequest = StringRequest(Request.Method.PUT, url, future, future)

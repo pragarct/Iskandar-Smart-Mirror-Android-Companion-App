@@ -29,7 +29,7 @@ class OldMainActivity : BaseActivity() {
             executor.execute {
                 // Need to user 10.0.2.2 for the emulator. I have no idea why.
                 // We need to test on an actual device. I have a feeling 10.0.2.2 won't work
-                val result = URL("http://10.0.2.2:5000/weather").readText()
+                val result = URL(getString(R.string.server_url) + "weather").readText()
 
                 handler.post {
                     Log.d(javaClass.simpleName, result)
