@@ -26,6 +26,7 @@ import java.util.concurrent.TimeoutException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
+var previousColorInt: Int = 0
 var previousColor: String = "#FFFFFF"
 var previousBrightness: Float = 100f
 var justStarted = true
@@ -44,46 +45,51 @@ class LightingActivity : BaseActivity() {
 
         // Update hex edit text when color picker is changed
         colorPickerView.addOnColorChangedListener {
-            val color = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
-            val buttonColor = "#$color"
             // Change submit button background to selected color
-            submitButton.backgroundTintList = generateColorStateList(Color.parseColor(buttonColor))
-
+            submitButton.backgroundTintList = generateColorStateList(colorPickerView.selectedColor)
             // Change submit button text to complimentary color
-            submitButton.setTextColor(getComplementaryColor(colorPickerView.selectedColor))
+            if ((colorPickerView.selectedColor.alpha / 2.55).toInt() > 50) {
+                submitButton.setTextColor(getComplementaryColor(colorPickerView.selectedColor))
+            } else {
+                val blackHex = "#000000"
+                submitButton.setTextColor(Color.parseColor(blackHex))
+            }
             // Change hex edit text to new color selected
+            val color = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
             hexCodeEditText.setText(color)
         }
 
         // Update manual button to inputted color in hex EditText
         hexCodeEditText.addTextChangedListener {
             if (hexCodeEditText.text.length == 6 && hexCodeEditText.hasFocus()) {
-                val color = "#" + hexCodeEditText.text.toString()
+                val hex = "#" + hexCodeEditText.text.toString()
 
-                if (isHexColorCode(color)) {
+                if (isHexColorCode(hex)) {
                     // Change manual button background to selected color
-                    manualButton.backgroundTintList = generateColorStateList(
-                        Color.parseColor(color)
-                    )
+                    manualButton.backgroundTintList = generateColorStateList(Color.parseColor(hex))
                     // Change manual button text to complimentary color
-                    manualButton.setTextColor(getComplementaryColor(Color.parseColor(color)))
-                    hexCodeEditText.requestFocus()
+                    if ((colorPickerView.selectedColor.alpha / 2.55).toInt() > 50) {
+                        manualButton.setTextColor(getComplementaryColor(Color.parseColor(hex)))
+                    } else {
+                        val blackHex = "#000000"
+                        manualButton.setTextColor(Color.parseColor(blackHex))
+                    }
                 }
             }
         }
 
         // Manual button, when pressed, change color to manually inputted hex value
         manualButton.setOnClickListener {
-            val color = "#" + hexCodeEditText.text.toString()
-
             // Set background to transparent
             manualButton.backgroundTintList = generateColorStateList(Color.LTGRAY)
             manualButton.setTextColor(Color.BLACK)
 
-            if (isHexColorCode(color)) {
-                colorPickerView.setColor(Color.parseColor(color), false)
+            val hex = "#" + hexCodeEditText.text.toString()
+            if (isHexColorCode(hex)) {
+                // Set the current color to the one previously selected
+                colorPickerView.setColor(Color.parseColor(hex), false)
                 // Change submit button background to selected color
-                submitButton.backgroundTintList = generateColorStateList(Color.parseColor(color))
+                submitButton.backgroundTintList = generateColorStateList(colorPickerView.selectedColor)
                 // Change submit button text to complimentary color
                 submitButton.setTextColor(getComplementaryColor(colorPickerView.selectedColor))
             } else {
@@ -97,30 +103,42 @@ class LightingActivity : BaseActivity() {
             putLightingInformation(this)
         }
 
-        // Get the previous/current color from intent
-        previousColor = intent.extras?.getString("color").toString()
-        // Change reset button background to selected color
-        resetButton.backgroundTintList = generateColorStateList(Color.parseColor(previousColor))
-        // Change reset button text to complimentary color
-        resetButton.setTextColor(getComplementaryColor(Color.parseColor(previousColor)))
-
-        // Get the previous/current brightness from intent
-        val brightnessString: String = "0" + intent.extras?.getString("brightness")
-        previousBrightness = brightnessString.toFloat()
-
         // Reset button - when pressed, change color to previously selected color
         resetButton.setOnClickListener {
             setDefaultValues()
             // Change submit button background to selected color
             submitButton.backgroundTintList = generateColorStateList(colorPickerView.selectedColor)
             // Change submit button text to complimentary color
-            submitButton.setTextColor(getComplementaryColor(colorPickerView.selectedColor))
+            if ((colorPickerView.selectedColor.alpha / 2.55).toInt() > 50) {
+                submitButton.setTextColor(getComplementaryColor(Color.parseColor(previousColor)))
+            } else {
+                val blackHex = "#000000"
+                submitButton.setTextColor(Color.parseColor(blackHex))
+            }
         }
 
         // This is necessary, otherwise the brightness (alpha) slider is not initialized
         drawer_layout.viewTreeObserver.addOnGlobalLayoutListener {
             if (justStarted) {
+                // Get the previous/current color from intent
+                previousColor = intent.extras?.getString("color").toString()
+                // Get the previous/current brightness from intent
+                val brightnessString: String = "0" + intent.extras?.getString("brightness")
+                previousBrightness = brightnessString.toFloat()
+                previousColorInt = colorPickerView.selectedColor
+
                 setDefaultValues()
+
+                // Change reset button background to selected color
+                resetButton.backgroundTintList = generateColorStateList(colorPickerView.selectedColor)
+                // Change reset button text to complimentary color
+                if ((colorPickerView.selectedColor.alpha / 2.55).toInt() > 50) {
+                    resetButton.setTextColor(getComplementaryColor(colorPickerView.selectedColor))
+                } else {
+                    val blackHex = "#000000"
+                    resetButton.setTextColor(Color.parseColor(blackHex))
+                }
+
                 justStarted = false
             }
         }
@@ -146,13 +164,9 @@ class LightingActivity : BaseActivity() {
     }
 
     private fun putLightingInformation(context: Context) {
-        // val context = this
-
         doAsync {
             // Convert to hex
             val hexColor = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
-            // val color = "#$hexColor"
-            // val color = Color.parseColor("#$hexColor")
             val brightness = (colorPickerView.selectedColor.alpha / 2.55).toInt()
 
             // Instantiate the RequestQueue.
@@ -165,37 +179,36 @@ class LightingActivity : BaseActivity() {
             queue.add(stringRequest)
 
             try {
-                val response = future.get(5000, TimeUnit.MILLISECONDS) // this will block
+                val response = future.get(500, TimeUnit.MILLISECONDS) // this will block
                 Log.d("Response", response)
 
-                // build alert dialog
+                // Build alert dialog
                 runOnUiThread {
                     val dialogBuilder = AlertDialog.Builder(context)
 
-                    // set message of alert dialog
+                    // Set message of alert dialog
                     dialogBuilder.setMessage("Do you want to keep this color?")
-                        // if the dialog is cancelable
+                        // If the dialog is cancelable
                         .setCancelable(false)
-                        // positive button text and action
+                        // Positive button text and action
                         .setPositiveButton("Keep Color") { _, _ ->
                             val intent = Intent(context, HomeActivity::class.java)
                             startActivity(intent)
                         }
-                        // negative button text and action
+                        // Negative button text and action
                         .setNegativeButton("Choose New Color") { dialog, _ -> dialog.cancel() }
 
-                    // create dialog box
+                    // Create dialog box
                     val alert = dialogBuilder.create()
-                    // set title for alert dialog box
+                    // Set title for alert dialog box
                     alert.setTitle("Color Confirmation")
-                    // show alert dialog
+                    // Show alert dialog
                     alert.show()
                 }
             } catch (e: InterruptedException) {
                 runOnUiThread {
                     Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
                 }
-                // Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
             } catch (e: ExecutionException) {
                 runOnUiThread {
                     Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
@@ -243,13 +256,16 @@ class LightingActivity : BaseActivity() {
 
     // Used to set text color so it is visible
     private fun getComplementaryColor(color: Int): Int {
-        var r = color and 255
-        var g = color shr 8 and 255
-        var b = color shr 16 and 255
-        val a = color shr 24 and 255
-        r = 255 - r
-        g = 255 - g
-        b = 255 - b
-        return r + (g shl 8) + (b shl 16) + (a shl 24)
+        // get existing colors
+        val alpha = Color.alpha(color)
+        var red = Color.red(color)
+        var blue = Color.blue(color)
+        var green = Color.green(color)
+
+        // find compliments
+        red = red.inv() and 0xff
+        blue = blue.inv() and 0xff
+        green = green.inv() and 0xff
+        return Color.argb(alpha, red, green, blue)
     }
 }
