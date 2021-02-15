@@ -37,12 +37,12 @@ class BluetoothActivity : BaseActivity() {
 
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 
-        listView = findViewById<ListView>(R.id.lv_visible)
+        listView = findViewById(R.id.lv_visible)
         val discDev = findViewById<TextView>(R.id.discDev)
         val btnVisible = findViewById<Button>(R.id.btn_visible)
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
 
-        btnVisible.setOnClickListener() {
+        btnVisible.setOnClickListener {
             // find devices that have already been bonded to
             val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
             pairedDevices?.forEach { device ->
@@ -76,8 +76,6 @@ class BluetoothActivity : BaseActivity() {
                     Toast.makeText(applicationContext, "Not Connected", Toast.LENGTH_SHORT).show()
                 }
             }
-
-
         }
 
         if (bluetoothAdapter?.isEnabled == false) {
@@ -86,3 +84,4 @@ class BluetoothActivity : BaseActivity() {
         }
     }
 }
+
