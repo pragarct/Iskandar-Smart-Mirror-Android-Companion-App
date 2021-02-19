@@ -5,27 +5,33 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ListView
+import android.widget.TextView
+import android.widget.Toast
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_change_location.*
 import java.io.IOException
-import java.util.*
+import java.util.UUID
 import kotlin.collections.ArrayList
 
 const val REQUEST_ENABLE_BT = 1
 
 val names = mutableListOf<String>()
 val addresses = mutableListOf<String>()
-val list : ArrayList<BluetoothDevice> = ArrayList()
+val list: ArrayList<BluetoothDevice> = ArrayList()
 lateinit var adapter: ArrayAdapter<BluetoothDevice>
-lateinit var listView: ListView
 
 class BluetoothActivity : BaseActivity() {
 
-    companion object{
-        var new_UUID:UUID = UUID.fromString("89c76f22-bd18-498b-a29a-ed05eca10a1c")
-        var bluetoothSocket:BluetoothSocket? = null
+    lateinit var listView: ListView
+
+    companion object {
+        var new_UUID: UUID = UUID.fromString("89c76f22-bd18-498b-a29a-ed05eca10a1c")
+        var bluetoothSocket: BluetoothSocket? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +61,7 @@ class BluetoothActivity : BaseActivity() {
             listView.adapter = adapter
 
             listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-                val device:BluetoothDevice = list[position]
+                val device: BluetoothDevice = list[position]
 
                 val mmSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
                     device.createRfcommSocketToServiceRecord(new_UUID)
@@ -71,7 +77,7 @@ class BluetoothActivity : BaseActivity() {
                             Toast.makeText(applicationContext, "Connected", Toast.LENGTH_SHORT).show()
                         }
                     }
-                } catch (e: IOException){
+                } catch (e: IOException) {
                     e.printStackTrace()
                     Toast.makeText(applicationContext, "Not Connected", Toast.LENGTH_SHORT).show()
                 }
@@ -84,4 +90,3 @@ class BluetoothActivity : BaseActivity() {
         }
     }
 }
-
