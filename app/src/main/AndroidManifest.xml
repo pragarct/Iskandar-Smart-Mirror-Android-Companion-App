@@ -33,7 +33,6 @@
         <activity
             android:name=".activities.ui.events.EventsOverviewActivity"
             android:label="@string/events" />
-        <activity android:name=".classes.InformationBaseActivity" />
         <activity
             android:name=".activities.ui.ChangeLocationActivity"
             android:label="@string/change_location" />
@@ -46,9 +45,6 @@
         <activity
             android:name=".activities.ui.alarms.AlarmOverviewActivity"
             android:label="@string/alarms" />
-        <activity
-            android:name=".activities.ui.InitialSetupActivity"
-            android:label="@string/iskandar_initial_setup" />
         <activity
             android:name=".activities.ui.HomeActivity"
             android:label="@string/iskandar_home" />

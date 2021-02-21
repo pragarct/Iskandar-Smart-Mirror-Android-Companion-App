@@ -22,7 +22,7 @@ class TestActivity : BaseActivity() {
 
         // Create listener for normally starting the app
         normalStart.setOnClickListener {
-            val intent = Intent(this, InitialSetupActivity::class.java)
+            val intent = Intent(this, ChangeLocationActivity::class.java)
             startActivity(intent)
         }
 

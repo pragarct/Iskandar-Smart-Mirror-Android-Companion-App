@@ -4,11 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
-import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_home.nav_view
 
 class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +39,7 @@ class HomeActivity : BaseActivity() {
             getLightingSettings(intent)
         }
         events_button.setOnClickListener {
-            var intent = Intent(this, EventsOverviewActivity::class.java)
-            intent = getEvents(intent)
-            startActivity(intent)
+            getEvents()
         }
         change_information_button.setOnClickListener {
             val intent = Intent(this, ChangeLocationActivity::class.java)

@@ -3,6 +3,7 @@ package com.iskandar.mirror.companion.app.classes
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.provider.CalendarContract
 import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -26,9 +27,9 @@ import com.iskandar.mirror.companion.app.activities.ui.ChangeLocationActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
 import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
-import com.iskandar.mirror.companion.app.activities.ui.events.EventsOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.drawer_layout
+import kotlinx.android.synthetic.main.activity_home.nav_view
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.util.Locale
@@ -37,7 +38,6 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
 open class BaseActivity : AppCompatActivity() {
-
     // Navigation Bar
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -74,9 +74,7 @@ open class BaseActivity : AppCompatActivity() {
                     getLightingSettings(intent)
                 }
                 R.id.nav_events -> {
-                    var intent = Intent(this, EventsOverviewActivity::class.java)
-                    intent = getEvents(intent)
-                    startActivity(intent)
+                    getEvents()
                 }
                 R.id.nav_location -> {
                     val intent = Intent(this, ChangeLocationActivity::class.java)
@@ -161,12 +159,17 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun getEvents(intent: Intent): Intent {
-        return intent
+    fun getEvents() {
+        val calendarUri = CalendarContract.CONTENT_URI
+            .buildUpon()
+            .appendPath("time")
+            .build()
+        startActivity(Intent(Intent.ACTION_VIEW, calendarUri))
     }
 
     fun getWeatherAndTrafficInformation(intent: Intent) {
         val context = this
+        intent.putExtra("initialSetup", true)
 
         doAsync {
             // Instantiate the RequestQueue.
