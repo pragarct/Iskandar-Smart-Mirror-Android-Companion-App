@@ -13,6 +13,8 @@ import com.iskandar.mirror.companion.app.classes.BaseActivity
 import com.iskandar.mirror.companion.app.classes.makeClearableEditText
 import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
 import kotlinx.android.synthetic.main.activity_change_location.*
+import kotlinx.android.synthetic.main.activity_change_location.nav_view
+import kotlinx.android.synthetic.main.activity_change_location.submitButton
 import org.jetbrains.anko.doAsync
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
@@ -20,7 +22,7 @@ import java.util.concurrent.TimeoutException
 
 class ChangeLocationActivity : BaseActivity() {
 
-    private var initialSetup = false
+    private var initialSetup = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +34,18 @@ class ChangeLocationActivity : BaseActivity() {
         }
 
         if (initialSetup) {
+            title = getString(R.string.iskandar_initial_setup)
+        } else {
             setUpNavigationBar()
             // Highlights the item in the navigation bar
             nav_view.setCheckedItem(R.id.nav_location)
-        } else {
-            title = getString(R.string.iskandar_initial_setup)
         }
 
         setupListenersAndEditTexts()
 
-        val zipCode: String? = intent.extras?.getString("zipCode")
         val city: String? = intent.extras?.getString("city")
+        val state: String? = intent.extras?.getString("state")
+        val zipCode: String? = intent.extras?.getString("zipCode")
         val homeAddress: String? = intent.extras?.getString("homeAddress")
         val workSchoolAddress: String? = intent.extras?.getString("workSchoolAddress")
 
@@ -50,8 +53,9 @@ class ChangeLocationActivity : BaseActivity() {
             !homeAddress.isNullOrEmpty() && !workSchoolAddress.isNullOrEmpty()
         ) {
             // Set edit texts to currently set values
-            zipCodeEditText.setText(zipCode)
             cityEditText.setText(city)
+            stateEditText.setText(state)
+            zipCodeEditText.setText(zipCode)
             homeAddressEditText.setText(homeAddress)
             workSchoolAddressEditText.setText(workSchoolAddress)
         }
@@ -59,12 +63,15 @@ class ChangeLocationActivity : BaseActivity() {
 
     private fun setupListenersAndEditTexts() {
         // Add clear buttons to EditTexts, and drawableEnd in xml allow a clear button to be made
-        addRightCancelDrawable(zipCodeEditText)
-        zipCodeEditText.onRightDrawableClicked { it.text.clear() }
-        zipCodeEditText.makeClearableEditText(null, null)
         addRightCancelDrawable(cityEditText)
         cityEditText.onRightDrawableClicked { it.text.clear() }
         cityEditText.makeClearableEditText(null, null)
+        addRightCancelDrawable(stateEditText)
+        stateEditText.onRightDrawableClicked { it.text.clear() }
+        stateEditText.makeClearableEditText(null, null)
+        addRightCancelDrawable(zipCodeEditText)
+        zipCodeEditText.onRightDrawableClicked { it.text.clear() }
+        zipCodeEditText.makeClearableEditText(null, null)
         addRightCancelDrawable(homeAddressEditText)
         homeAddressEditText.onRightDrawableClicked { it.text.clear() }
         homeAddressEditText.makeClearableEditText(null, null)
@@ -75,16 +82,23 @@ class ChangeLocationActivity : BaseActivity() {
         // Submit is pressed, run data validation
         var initialDataIsValid = true
         submitButton.setOnClickListener {
-            // ZIP code is not entered correctly
-            if (zipCodeEditText.length() != 5) {
-                val failedString = getString(R.string.zip_error_message)
+            // No city was entered
+            if (cityEditText.length() == 0) {
+                val failedString = getString(R.string.city_error_message)
                 Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
                 initialDataIsValid = false
             }
 
-            // No city was entered
-            if (cityEditText.length() == 0) {
-                val failedString = getString(R.string.city_error_message)
+            // No state was entered
+            if (stateEditText.length() == 0) {
+                val failedString = getString(R.string.state_error_message)
+                Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
+                initialDataIsValid = false
+            }
+
+            // ZIP code is not entered correctly
+            if (zipCodeEditText.length() != 5) {
+                val failedString = getString(R.string.zip_error_message)
                 Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
                 initialDataIsValid = false
             }
@@ -105,12 +119,28 @@ class ChangeLocationActivity : BaseActivity() {
 
             // Data is valid, open up Home Activity
             if (initialDataIsValid) {
-                val intent = Intent(this, HomeActivity::class.java)
-                putWeatherAndTrafficInformation(intent)
+                val intent: Intent = if (initialSetup) {
+                    Intent(this, ChangeGmailActivity::class.java)
+                } else {
+                    Intent(this, HomeActivity::class.java)
+                }
+
+                putLocationInformation(intent)
             }
 
             initialDataIsValid = true
         }
+    }
+
+    private fun putLocationInformation(intent: Intent) {
+        val city = cityEditText.text
+        val state = stateEditText.text
+        val zip = zipCodeEditText.text
+        val homeAddress = homeAddressEditText.text
+        val workSchoolAddress = workSchoolAddressEditText.text
+        val url = getString(R.string.server_url) +
+            "location?city=$city&state=$state&zip=$zip&home=$homeAddress&work=$workSchoolAddress"
+        putRequest(this, intent, url, "location")
     }
 
     private fun putWeatherAndTrafficInformation(intent: Intent) {

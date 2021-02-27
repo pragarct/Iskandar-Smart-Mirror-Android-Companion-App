@@ -45,5 +45,10 @@
             android:id="@+id/nav_bluetooth"
             android:icon="@drawable/ic_bluetooth"
             android:title="@string/bluetooth" />
+
+        <item
+            android:id="@+id/nav_gmail"
+            android:icon="@drawable/ic_gmail"
+            android:title="@string/gmail" />
     </group>
 </menu>

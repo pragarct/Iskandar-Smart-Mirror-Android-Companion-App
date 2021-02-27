@@ -12,96 +12,79 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/weatherTextView"
+            android:id="@+id/googleiCalTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/weather_information"
+            android:text="@string/google_ical_explanation"
             android:padding="8dp"
             android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/cityEditText"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/googleiCalStep1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/cancel"
-            android:hint="@string/city"
-            android:importantForAutofill="no"
+            android:text="@string/google_ical_step1"
+            android:padding="8dp"
             android:layout_margin="8dp"
-            android:inputType="textCapWords"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weatherTextView"/>
+            app:layout_constraintTop_toBottomOf="@id/googleiCalTextView" />
+
+        <TextView
+            android:id="@+id/googleiCalStep2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/google_ical_step2"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleiCalStep1" />
+
+        <TextView
+            android:id="@+id/googleiCalStep3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/google_ical_step3"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleiCalStep2" />
+
+        <TextView
+            android:id="@+id/googleiCalStep4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/google_ical_step4"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleiCalStep3" />
+
+        <TextView
+            android:id="@+id/googleiCalStep5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/google_ical_step5"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleiCalStep4" />
 
         <EditText
-            android:id="@+id/stateEditText"
+            android:id="@+id/googleiCalEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/cancel"
-            android:hint="@string/state"
-            android:importantForAutofill="no"
-            android:layout_margin="8dp"
-            android:inputType="textCapWords"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cityEditText"/>
-
-        <EditText
-            android:id="@+id/zipCodeEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/cancel"
-            android:hint="@string/ZIP_code"
+            android:hint="@string/google_ical"
             android:importantForAutofill="no"
             android:maxLength="5"
             android:inputType="number"
             android:layout_margin="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stateEditText" />
-
-        <TextView
-            android:id="@+id/trafficTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/traffic_information"
-            android:padding="8dp"
-            android:layout_marginTop="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/zipCodeEditText" />
-
-        <EditText
-            android:id="@+id/homeAddressEditText"
-            android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:drawableEnd="@drawable/cancel"
-            android:hint="@string/home_address"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/trafficTextView"/>
-
-        <EditText
-            android:id="@+id/workSchoolAddressEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/cancel"
-            android:hint="@string/work_school_address"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            android:layout_margin="8dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/homeAddressEditText"/>
+            app:layout_constraintTop_toBottomOf="@id/googleiCalStep5" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submitButton"
@@ -111,7 +94,7 @@
             android:text="@string/submit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/workSchoolAddressEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/googleiCalEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

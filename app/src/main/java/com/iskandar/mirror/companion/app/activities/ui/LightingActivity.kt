@@ -1,28 +1,17 @@
 package com.iskandar.mirror.companion.app.activities.ui
 
-import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.alpha
 import androidx.core.widget.addTextChangedListener
-import com.android.volley.Request
-import com.android.volley.toolbox.RequestFuture
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import com.iskandar.mirror.companion.app.classes.makeClearableEditText
 import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
 import kotlinx.android.synthetic.main.activity_lighting.*
-import org.jetbrains.anko.doAsync
-import java.util.concurrent.ExecutionException
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -42,6 +31,8 @@ class LightingActivity : BaseActivity() {
         addRightCancelDrawable(hexCodeEditText)
         hexCodeEditText.onRightDrawableClicked { it.text.clear() }
         hexCodeEditText.makeClearableEditText(null, null)
+        // Reset variable
+        justStarted = true
 
         // Update hex edit text when color picker is changed
         colorPickerView.addOnColorChangedListener {
@@ -100,7 +91,7 @@ class LightingActivity : BaseActivity() {
 
         // Submit button - when pressed, a popup appears asking to confirm the color
         submitButton.setOnClickListener {
-            putLightingInformation(this)
+            putLightingInformation()
         }
 
         // Reset button - when pressed, change color to previously selected color
@@ -144,11 +135,6 @@ class LightingActivity : BaseActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        justStarted = true
-    }
-
     private fun setDefaultValues() {
         // Set the current color to the one previously selected
         colorPickerView.setColor(Color.parseColor(previousColor), false)
@@ -163,63 +149,13 @@ class LightingActivity : BaseActivity() {
         hexCodeEditText.setText(color)
     }
 
-    private fun putLightingInformation(context: Context) {
-        doAsync {
-            // Convert to hex
-            val hexColor = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
-            val brightness = (colorPickerView.selectedColor.alpha / 2.55).toInt()
-
-            // Instantiate the RequestQueue.
-            val queue = Volley.newRequestQueue(context)
-            val url = getString(R.string.server_url) + "lighting?rgb=$hexColor&brightness=$brightness"
-
-            val future = RequestFuture.newFuture<String>()
-            val stringRequest = StringRequest(Request.Method.PUT, url, future, future)
-            // Add the request to the RequestQueue.
-            queue.add(stringRequest)
-
-            try {
-                val response = future.get(500, TimeUnit.MILLISECONDS) // this will block
-                Log.d("Response", response)
-
-                // Build alert dialog
-                runOnUiThread {
-                    val dialogBuilder = AlertDialog.Builder(context)
-
-                    // Set message of alert dialog
-                    dialogBuilder.setMessage("Do you want to keep this color?")
-                        // If the dialog is cancelable
-                        .setCancelable(false)
-                        // Positive button text and action
-                        .setPositiveButton("Keep Color") { _, _ ->
-                            val intent = Intent(context, HomeActivity::class.java)
-                            startActivity(intent)
-                        }
-                        // Negative button text and action
-                        .setNegativeButton("Choose New Color") { dialog, _ -> dialog.cancel() }
-
-                    // Create dialog box
-                    val alert = dialogBuilder.create()
-                    // Set title for alert dialog box
-                    alert.setTitle("Color Confirmation")
-                    // Show alert dialog
-                    alert.show()
-                }
-            } catch (e: InterruptedException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-            } catch (e: ExecutionException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-            } catch (e: TimeoutException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-                Log.d("Response", "LIGHTING TIMEOUT")
-            }
-        }
+    private fun putLightingInformation() {
+        val intent = Intent(this, HomeActivity::class.java)
+        // Convert to hex
+        val hexColor = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
+        val brightness = (colorPickerView.selectedColor.alpha / 2.55).toInt()
+        val url = getString(R.string.server_url) + "lighting?rgb=$hexColor&brightness=$brightness"
+        putRequest(this, intent, url, "lighting")
     }
 
     private fun isHexColorCode(color: String): Boolean {

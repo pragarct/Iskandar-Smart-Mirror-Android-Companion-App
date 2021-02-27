@@ -5,20 +5,19 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Button
-import android.widget.AdapterView
+import android.widget.Toast
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
-import kotlinx.android.synthetic.main.activity_change_location.*
+import kotlinx.android.synthetic.main.activity_bluetooth.nav_view
 import java.io.IOException
 import java.io.OutputStream
-import java.util.*
+import java.util.UUID
 import kotlin.collections.ArrayList
-
 
 const val REQUEST_ENABLE_BT = 1
 
@@ -89,8 +88,7 @@ class BluetoothActivity : BaseActivity() {
                             // member streams are final
                             try {
                                 tmpOut = socket.outputStream
-                            }
-                            catch (e: IOException) {
+                            } catch (e: IOException) {
                                 Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
                             }
 
@@ -98,14 +96,11 @@ class BluetoothActivity : BaseActivity() {
 
                             val testingString = "THIS IS A TEST"
 
-                            val bytes = testingString.toByteArray() //converts entered String into bytes
+                            val bytes = testingString.toByteArray() // converts entered String into bytes
 
-                            try
-                            {
+                            try {
                                 mmOutStream!!.write(bytes)
-                            }
-                            catch (e: IOException)
-                            {
+                            } catch (e: IOException) {
                                 Toast.makeText(applicationContext, "Failed to send.", Toast.LENGTH_SHORT).show()
                             }
                         }

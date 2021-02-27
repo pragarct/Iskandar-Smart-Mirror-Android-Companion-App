@@ -21,20 +21,6 @@
     <string name="quick_start_button">Quick Start</string>
     <string name="send_test_data_button">Send Test Data</string>
 
-    <!--InitialStartup-->
-    <string name="weather_information">Weather Information</string>
-    <string name="ZIP_code">ZIP Code</string>
-    <string name="city">City</string>
-
-    <string name="traffic_information">Traffic Information</string>
-    <string name="home_address">Home Address</string>
-    <string name="work_school_address">Work/School Address</string>
-
-    <string name="zip_error_message">Please enter a 5-digit ZIP code.</string>
-    <string name="city_error_message">Please enter a city.</string>
-    <string name="home_address_error_message">Please enter a home address.</string>
-    <string name="work_school_address_error_message">Please enter either your work or school address.</string>
-
     <string name="submit">Submit</string>
 
     <!--Home-->
@@ -56,11 +42,26 @@
     <string name="manual">Manual</string>
     <string name="reset">Reset</string>
     <string name="hex_code">Hex Code</string>
+    <string name="hex_error_message">Please enter a hex color code (contains only A–F and 0–9).</string>
 
     <!--Change Location-->
     <string name="change_location">Change Location</string>
     <string name="location">Location</string>
-    <string name="hex_error_message">Please enter a hex color code (contains only A–F and 0–9).</string>
+
+    <string name="weather_information">Weather Information</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="ZIP_code">ZIP Code</string>
+
+    <string name="traffic_information">Traffic Information</string>
+    <string name="home_address">Home Address</string>
+    <string name="work_school_address">Work/School Address</string>
+
+    <string name="city_error_message">Please enter a city.</string>
+    <string name="state_error_message">Please enter a state.</string>
+    <string name="zip_error_message">Please enter a 5-digit ZIP code.</string>
+    <string name="home_address_error_message">Please enter a home address.</string>
+    <string name="work_school_address_error_message">Please enter either your work or school address.</string>
 
     <!--Bluetooth-->
     <string name="bluetooth">Bluetooth</string>
@@ -74,6 +75,16 @@
     <!--Phone URL-->
     <!--<string name="server_url">localhost:5000/</string>-->
 
+    <!--Change Gmail-->
+    <string name="gmail">Gmail</string>
+    <string name="google_ical">Google iCal Link</string>
+    <string name="google_ical_explanation">What is a Google iCal Link?\nA Google iCal Link is a link that will be used to link Iskandar to your Google Calendar.</string>
+    <string name="google_ical_step1">1. Click this link https://calendar.google.com/calendar/u/0/r</string>
+    <string name="google_ical_step2">2. Under the "My calendars" section on the left side, hover over your username.</string>
+    <string name="google_ical_step3">3. Click the three dots and then click "Settings and sharing".</string>
+    <string name="google_ical_step4">4. Scroll down to the "Secret address in iCal format"</string>
+    <string name="google_ical_step5">5. Copy that link and paste it in the textbox below"</string>
+    
     <!--Events-->
     <string name="events">Events</string>
 

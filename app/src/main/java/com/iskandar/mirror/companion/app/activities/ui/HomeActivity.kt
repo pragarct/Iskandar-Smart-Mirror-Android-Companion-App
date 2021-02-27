@@ -16,38 +16,36 @@ class HomeActivity : BaseActivity() {
         // Highlights the item in the navigation bar
         nav_view.setCheckedItem(R.id.nav_home)
 
-        // This is a test commit, no actual changes
-
         // Set up listeners for tile buttons
         alarms_button.setOnClickListener {
-            var intent = Intent(this, AlarmOverviewActivity::class.java)
-            intent = getAlarms(intent)
+            val intent = Intent(this, AlarmOverviewActivity::class.java)
+            // getRequest(intent, this, "alarms")
             startActivity(intent)
         }
         reminders_button.setOnClickListener {
-            var intent = Intent(this, RemindersOverviewActivity::class.java)
-            intent = getReminders(intent)
+            val intent = Intent(this, RemindersOverviewActivity::class.java)
+            // getRequest(intent, this, "reminders")
             startActivity(intent)
         }
         background_button.setOnClickListener {
-            var intent = Intent(this, BackgroundOverviewActivity::class.java)
-            intent = getBackgroundImage(intent)
+            val intent = Intent(this, BackgroundOverviewActivity::class.java)
+            // getRequest(intent, this, "background")
             startActivity(intent)
         }
         lighting_button.setOnClickListener {
             val intent = Intent(this, LightingActivity::class.java)
-            getLightingSettings(intent)
+            getRequest(intent, this, "lighting")
         }
         events_button.setOnClickListener {
-            getEvents()
+            openGoogleCalenderApp()
         }
-        change_information_button.setOnClickListener {
+        change_location_button.setOnClickListener {
             val intent = Intent(this, ChangeLocationActivity::class.java)
-            getWeatherAndTrafficInformation(intent)
+            getRequest(intent, this, "location")
         }
         bluetooth_button.setOnClickListener {
-            var intent = Intent(this, BluetoothActivity::class.java)
-            intent = getBluetoothInformation(intent)
+            val intent = Intent(this, BluetoothActivity::class.java)
+            // getRequest(intent, this, "bluetooth")
             startActivity(intent)
         }
     }
