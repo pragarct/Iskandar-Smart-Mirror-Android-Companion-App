@@ -5,32 +5,36 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
+import android.widget.Toast
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
+import android.widget.Button
+import android.widget.AdapterView
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_change_location.*
 import java.io.IOException
-import java.util.UUID
+import java.io.OutputStream
+import java.util.*
 import kotlin.collections.ArrayList
+
 
 const val REQUEST_ENABLE_BT = 1
 
 val names = mutableListOf<String>()
 val addresses = mutableListOf<String>()
 val list: ArrayList<BluetoothDevice> = ArrayList()
-lateinit var adapter: ArrayAdapter<BluetoothDevice>
+lateinit var adapter: ArrayAdapter<String>
 
 class BluetoothActivity : BaseActivity() {
 
     lateinit var listView: ListView
 
+    private var mmOutStream: OutputStream? = null
+
     companion object {
-        var new_UUID: UUID = UUID.fromString("89c76f22-bd18-498b-a29a-ed05eca10a1c")
+        var new_UUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
         var bluetoothSocket: BluetoothSocket? = null
     }
 
@@ -46,7 +50,7 @@ class BluetoothActivity : BaseActivity() {
         listView = findViewById(R.id.lv_visible)
         val discDev = findViewById<TextView>(R.id.discDev)
         val btnVisible = findViewById<Button>(R.id.btn_visible)
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
 
         btnVisible.setOnClickListener {
             // find devices that have already been bonded to
@@ -75,6 +79,35 @@ class BluetoothActivity : BaseActivity() {
                             // until it succeeds or throws an exception.
                             socket.connect()
                             Toast.makeText(applicationContext, "Connected", Toast.LENGTH_SHORT).show()
+
+                            var tmpOut: OutputStream? = null
+
+                            // Get the input and output streams, using temp objects because
+                            // member streams are final
+
+                            // Get the input and output streams, using temp objects because
+                            // member streams are final
+                            try {
+                                tmpOut = socket.outputStream
+                            }
+                            catch (e: IOException) {
+                                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+                            }
+
+                            mmOutStream = tmpOut
+
+                            val testingString = "THIS IS A TEST"
+
+                            val bytes = testingString.toByteArray() //converts entered String into bytes
+
+                            try
+                            {
+                                mmOutStream!!.write(bytes)
+                            }
+                            catch (e: IOException)
+                            {
+                                Toast.makeText(applicationContext, "Failed to send.", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 } catch (e: IOException) {
