@@ -5,15 +5,16 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
+import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.AdapterView
 import android.widget.Toast
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
-import kotlinx.android.synthetic.main.activity_bluetooth.nav_view
+import kotlinx.android.synthetic.main.activity_bluetooth.*
 import java.io.IOException
 import java.io.OutputStream
 import java.util.UUID
@@ -49,7 +50,25 @@ class BluetoothActivity : BaseActivity() {
         listView = findViewById(R.id.lv_visible)
         val discDev = findViewById<TextView>(R.id.discDev)
         val btnVisible = findViewById<Button>(R.id.btn_visible)
+        val wifiHead = findViewById<TextView>(R.id.wifi_header)
+        val ssidTxt = findViewById<TextView>(R.id.ssid)
+        val passwordTxt = findViewById<TextView>(R.id.password)
+        val btnEnterWifi = findViewById<TextView>(R.id.btn_enter_wifi)
+        val etSSID = findViewById<TextView>(R.id.editText_SSID)
+        val etPassword = findViewById<TextView>(R.id.editText_Password)
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
+
+        btn_enter_wifi.setOnClickListener {
+
+            wifiHead.visibility = TextView.INVISIBLE
+            ssidTxt.visibility = TextView.INVISIBLE
+            passwordTxt.visibility = TextView.INVISIBLE
+            btnEnterWifi.visibility = Button.INVISIBLE
+            etSSID.visibility = EditText.INVISIBLE
+            etPassword.visibility = EditText.INVISIBLE
+
+            btnVisible.visibility = Button.VISIBLE
+        }
 
         btnVisible.setOnClickListener {
             // find devices that have already been bonded to

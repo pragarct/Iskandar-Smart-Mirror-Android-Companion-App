@@ -4,8 +4,14 @@
 
     <!--BT Activity-->
     <string name="bt_title">Find Your Mirror</string>
+    <string name="bt_wifi_title">Enter Wifi Information</string>
+    <string name="bt_ssid">SSID: </string>
+    <string name="bt_ssid_input"> </string>
+    <string name="bt_password">Password: </string>
+    <string name="bt_password_hint"> </string>
     <string name="disc_title">Discovered Devices:</string>
     <string name="btn_visible">Find Visible</string>
+    <string name="btn_enter_wifi">Enter</string>
 
     <!--Universal-->
     <string name="app_name">Iskandar Companion App</string>
