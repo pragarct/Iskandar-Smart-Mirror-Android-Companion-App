@@ -5,12 +5,12 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ListView
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.AdapterView
+import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
@@ -59,7 +59,6 @@ class BluetoothActivity : BaseActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
 
         btn_enter_wifi.setOnClickListener {
-
             wifiHead.visibility = TextView.INVISIBLE
             ssidTxt.visibility = TextView.INVISIBLE
             passwordTxt.visibility = TextView.INVISIBLE
