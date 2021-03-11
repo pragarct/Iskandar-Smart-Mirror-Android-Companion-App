@@ -101,7 +101,7 @@
     <string name="google_ical_step4">4. Scroll down to the "Secret address in iCal format"</string>
     <string name="google_ical_step5">5. Copy that link and paste it in the textbox below"</string>
     <string name="ical_error_message">Please enter a valid iCal link.</string>
-    
+
     <!--Events-->
     <string name="events">Events</string>
     <string name="refresh_mirror_confirm">Would you like to refresh the mirror?</string>

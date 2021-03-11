@@ -23,20 +23,20 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/quickStart"
-        android:text="@string/quick_start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
+        android:text="@string/quick_start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/normalStart" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sendTestData"
-        android:text="@string/send_test_data_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
+        android:text="@string/send_test_data_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quickStart" />
@@ -45,12 +45,12 @@
         android:id="@+id/help_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:importantForAccessibility="no"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:importantForAccessibility="no"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp"
         app:srcCompat="@android:drawable/ic_menu_help" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
