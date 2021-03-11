@@ -17,6 +17,8 @@
     <string name="app_name">Iskandar Companion App</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!--Activity Names-->
     <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
@@ -49,6 +51,10 @@
     <string name="reset">Reset</string>
     <string name="hex_code">Hex Code</string>
     <string name="hex_error_message">Please enter a hex color code (contains only A–F and 0–9).</string>
+    <string name="color_confirmation">Color Confirmation</string>
+    <string name="keep_color_confirm">Do you want to keep this color?</string>
+    <string name="keep_color">Keep Color</string>
+    <string name="choose_new_color">Choose New Color</string>
 
     <!--Change Location-->
     <string name="change_location">Change Location</string>
@@ -58,6 +64,10 @@
     <string name="city">City</string>
     <string name="state">State</string>
     <string name="ZIP_code">ZIP Code</string>
+
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
 
     <string name="traffic_information">Traffic Information</string>
     <string name="home_address">Home Address</string>
@@ -90,9 +100,12 @@
     <string name="google_ical_step3">3. Click the three dots and then click "Settings and sharing".</string>
     <string name="google_ical_step4">4. Scroll down to the "Secret address in iCal format"</string>
     <string name="google_ical_step5">5. Copy that link and paste it in the textbox below"</string>
+    <string name="ical_error_message">Please enter a valid iCal link.</string>
     
     <!--Events-->
     <string name="events">Events</string>
+    <string name="refresh_mirror_confirm">Would you like to refresh the mirror?</string>
+    <string name="welcome_back">Welcome Back</string>
 
     <!--Original Factorial-->
     <string name="title">This is just a template</string>

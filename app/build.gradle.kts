@@ -52,12 +52,12 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     implementation("com.github.QuadFlask:colorpicker:0.0.15")
-    implementation("com.android.volley:volley:1.1.1")
+    implementation("com.android.volley:volley:1.2.0")
     implementation("org.jetbrains.anko:anko-common:0.9")
 
     testImplementation(TestingLib.JUNIT)

@@ -7,17 +7,17 @@ import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import com.iskandar.mirror.companion.app.classes.makeClearableEditText
 import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
-import kotlinx.android.synthetic.main.activity_change_gmail.*
-import kotlinx.android.synthetic.main.activity_change_gmail.nav_view
-import kotlinx.android.synthetic.main.activity_change_gmail.submitButton
+import kotlinx.android.synthetic.main.activity_ical.*
+import kotlinx.android.synthetic.main.activity_ical.nav_view
+import kotlinx.android.synthetic.main.activity_ical.submitButton
 
-class ChangeGmailActivity : BaseActivity() {
+class ICalActivity : BaseActivity() {
 
     private var initialSetup = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_gmail)
+        setContentView(R.layout.activity_ical)
 
         val initialSetupMaybeNull: Boolean? = intent.extras?.getBoolean("initialSetup")
         if (initialSetupMaybeNull != null) {
@@ -51,35 +51,41 @@ class ChangeGmailActivity : BaseActivity() {
         // Submit is pressed, run data validation
         var initialDataIsValid = true
         submitButton.setOnClickListener {
-            // ZIP code is not entered correctly
-            if (googleiCalEditText.length() == 0) {
-                val failedString = getString(R.string.zip_error_message)
-                Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
+            // This checks that the input matches the format of an iCal link
+            if (googleiCalEditText.length() > 43) {
+                if ((googleiCalEditText.text.substring(0, 42) != "https://calendar.google.com/calendar/ical/") ||
+                    (!googleiCalEditText.text.contains("gmail.com/private")) ||
+                    (!googleiCalEditText.text.endsWith("/basic.ics"))
+                ) {
+                    initialDataIsValid = false
+                }
+            } else {
                 initialDataIsValid = false
             }
 
             // Data is valid, open up Home Activity
             if (initialDataIsValid) {
                 val intent: Intent = if (initialSetup) {
+                    // This is in case another setup stage is needed/order is moved
                     Intent(this, HomeActivity::class.java)
                 } else {
                     Intent(this, HomeActivity::class.java)
                 }
 
-                // putGoogleCalenderLink(intent)
-                // TO DO
-                startActivity(intent)
+                putGoogleCalenderLink(intent)
+            } else {
+                val failedString = getString(R.string.ical_error_message)
+                Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
             }
 
             initialDataIsValid = true
         }
     }
 
-    private fun putGoogleCalenderLink() {
-        val intent = Intent(this, HomeActivity::class.java)
+    private fun putGoogleCalenderLink(intent: Intent) {
         val iCalLink = googleiCalEditText.text.toString()
-        val url = getString(R.string.server_url) + "iCal?rgb=$iCalLink"
+        val url = getString(R.string.server_url) + "calendar?url=$iCalLink"
         // TO DO similar setup to location setup for changing intent?
-        putRequest(this, intent, url, "iCal")
+        putRequest(this, intent, url, "calendar")
     }
 }

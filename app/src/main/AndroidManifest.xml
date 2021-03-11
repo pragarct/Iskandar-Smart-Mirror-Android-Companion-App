@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".activities.ui.ChangeGmailActivity">
+            android:name=".activities.ui.ICalActivity">
 
         </activity>
         <activity
@@ -38,7 +38,7 @@
             android:name=".activities.ui.events.EventsOverviewActivity"
             android:label="@string/events" />
         <activity
-            android:name=".activities.ui.ChangeLocationActivity"
+            android:name=".activities.ui.LocationActivity"
             android:label="@string/change_location" />
         <activity
             android:name=".activities.ui.BackgroundOverviewActivity"

@@ -8,6 +8,8 @@ import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOvervi
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
+private var fromCalendarApp = false
+
 class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +39,11 @@ class HomeActivity : BaseActivity() {
             getRequest(intent, this, "lighting")
         }
         events_button.setOnClickListener {
+            fromCalendarApp = true
             openGoogleCalenderApp()
         }
         change_location_button.setOnClickListener {
-            val intent = Intent(this, ChangeLocationActivity::class.java)
+            val intent = Intent(this, LocationActivity::class.java)
             getRequest(intent, this, "location")
         }
         bluetooth_button.setOnClickListener {
@@ -48,5 +51,13 @@ class HomeActivity : BaseActivity() {
             // getRequest(intent, this, "bluetooth")
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        if (fromCalendarApp) {
+            fromCalendarAppDialogBuilder()
+        }
+        fromCalendarApp = false
+        super.onResume()
     }
 }

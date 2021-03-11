@@ -2,31 +2,22 @@ package com.iskandar.mirror.companion.app.activities.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.toolbox.RequestFuture
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import com.iskandar.mirror.companion.app.classes.makeClearableEditText
 import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
-import kotlinx.android.synthetic.main.activity_change_location.*
-import kotlinx.android.synthetic.main.activity_change_location.nav_view
-import kotlinx.android.synthetic.main.activity_change_location.submitButton
-import org.jetbrains.anko.doAsync
-import java.util.concurrent.ExecutionException
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
+import kotlinx.android.synthetic.main.activity_location.*
+import kotlinx.android.synthetic.main.activity_location.nav_view
+import kotlinx.android.synthetic.main.activity_location.submitButton
 
-class ChangeLocationActivity : BaseActivity() {
+class LocationActivity : BaseActivity() {
 
     private var initialSetup = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_location)
+        setContentView(R.layout.activity_location)
 
         val initialSetupMaybeNull: Boolean? = intent.extras?.getBoolean("initialSetup")
         if (initialSetupMaybeNull != null) {
@@ -46,6 +37,7 @@ class ChangeLocationActivity : BaseActivity() {
         val city: String? = intent.extras?.getString("city")
         val state: String? = intent.extras?.getString("state")
         val zipCode: String? = intent.extras?.getString("zipCode")
+        val units: String? = intent.extras?.getString("units")
         val homeAddress: String? = intent.extras?.getString("homeAddress")
         val workSchoolAddress: String? = intent.extras?.getString("workSchoolAddress")
 
@@ -58,6 +50,10 @@ class ChangeLocationActivity : BaseActivity() {
             zipCodeEditText.setText(zipCode)
             homeAddressEditText.setText(homeAddress)
             workSchoolAddressEditText.setText(workSchoolAddress)
+            // Set the radio button to the set values
+            if (units == "imperial") { fahrenheit.isChecked = true }
+            if (units == "celsius") { celsius.isChecked = true }
+            if (units == "kelvin") { kelvin.isChecked = true }
         }
     }
 
@@ -120,7 +116,7 @@ class ChangeLocationActivity : BaseActivity() {
             // Data is valid, open up Home Activity
             if (initialDataIsValid) {
                 val intent: Intent = if (initialSetup) {
-                    Intent(this, ChangeGmailActivity::class.java)
+                    Intent(this, ICalActivity::class.java)
                 } else {
                     Intent(this, HomeActivity::class.java)
                 }
@@ -136,73 +132,16 @@ class ChangeLocationActivity : BaseActivity() {
         val city = cityEditText.text
         val state = stateEditText.text
         val zip = zipCodeEditText.text
+
+        lateinit var temperature: String
+        if (fahrenheit.isChecked) { temperature = "imperial" }
+        if (celsius.isChecked) { temperature = "celsius" }
+        if (kelvin.isChecked) { temperature = "kelvin" }
+
         val homeAddress = homeAddressEditText.text
         val workSchoolAddress = workSchoolAddressEditText.text
         val url = getString(R.string.server_url) +
-            "location?city=$city&state=$state&zip=$zip&home=$homeAddress&work=$workSchoolAddress"
+            "location?city=$city&state=$state&zip=$zip&home=$homeAddress&work=$workSchoolAddress&units=$temperature"
         putRequest(this, intent, url, "location")
-    }
-
-    private fun putWeatherAndTrafficInformation(intent: Intent) {
-        val context = this
-
-        doAsync {
-            // Instantiate the RequestQueue.
-            val queue = Volley.newRequestQueue(context)
-            val weatherUrl = getString(R.string.server_url) + "weather?city=" +
-                cityEditText.text.toString() + "&zip_code=" +
-                zipCodeEditText.text.toString()
-
-            val future1 = RequestFuture.newFuture<String>()
-            val weatherStringRequest = StringRequest(Request.Method.PUT, weatherUrl, future1, future1)
-            // Add the request to the RequestQueue.
-            queue.add(weatherStringRequest)
-
-            try {
-                val response = future1.get(500, TimeUnit.MILLISECONDS) // this will block
-                Log.d("Response", response)
-            } catch (e: InterruptedException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-            } catch (e: ExecutionException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-            } catch (e: TimeoutException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-                Log.d("Response", "WEATHER TIMEOUT")
-            }
-
-            val trafficUrl = getString(R.string.server_url) + "traffic?home_address=" +
-                homeAddressEditText.text.toString() + "&work_or_school_address=" +
-                workSchoolAddressEditText.text.toString()
-
-            val future2 = RequestFuture.newFuture<String>()
-            val trafficStringRequest = StringRequest(Request.Method.PUT, trafficUrl, future2, future2)
-            // Add the request to the RequestQueue.
-            queue.add(trafficStringRequest)
-
-            try {
-                val response = future2.get(500, TimeUnit.MILLISECONDS) // this will block
-                Log.d("Response", response)
-                startActivity(intent)
-            } catch (e: InterruptedException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-            } catch (e: ExecutionException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-            } catch (e: TimeoutException) {
-                runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
-                }
-                Log.d("Response", "TRAFFIC TIMEOUT")
-            }
-        }
     }
 }

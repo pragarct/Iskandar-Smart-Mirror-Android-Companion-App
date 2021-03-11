@@ -24,10 +24,10 @@ import com.android.volley.toolbox.Volley
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.BluetoothActivity
-import com.iskandar.mirror.companion.app.activities.ui.ChangeGmailActivity
-import com.iskandar.mirror.companion.app.activities.ui.ChangeLocationActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
+import com.iskandar.mirror.companion.app.activities.ui.ICalActivity
 import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
+import com.iskandar.mirror.companion.app.activities.ui.LocationActivity
 import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import kotlinx.android.synthetic.main.activity_home.drawer_layout
@@ -38,6 +38,8 @@ import java.util.Locale
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
+
+private var fromCalendarApp = false
 
 open class BaseActivity : AppCompatActivity() {
     // Navigation Bar
@@ -76,10 +78,11 @@ open class BaseActivity : AppCompatActivity() {
                     getRequest(intent, this, "lighting")
                 }
                 R.id.nav_events -> {
+                    fromCalendarApp = true
                     openGoogleCalenderApp()
                 }
                 R.id.nav_location -> {
-                    val intent = Intent(this, ChangeLocationActivity::class.java)
+                    val intent = Intent(this, LocationActivity::class.java)
                     getRequest(intent, this, "location")
                 }
                 R.id.nav_bluetooth -> {
@@ -88,14 +91,20 @@ open class BaseActivity : AppCompatActivity() {
                     // getRequest(intent, this, "bluetooth")
                 }
                 R.id.nav_gmail -> {
-                    val intent = Intent(this, ChangeGmailActivity::class.java)
-                    // intent.putExtra("initialSetup", false)
-                    // startActivity(intent)
-                    getRequest(intent, this, "iCal")
+                    val intent = Intent(this, ICalActivity::class.java)
+                    getRequest(intent, this, "calendar")
                 }
             }
             true
         }
+    }
+
+    override fun onResume() {
+        if (fromCalendarApp) {
+            fromCalendarAppDialogBuilder()
+        }
+        fromCalendarApp = false
+        super.onResume()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -113,6 +122,29 @@ open class BaseActivity : AppCompatActivity() {
             .appendPath("time")
             .build()
         startActivity(Intent(Intent.ACTION_VIEW, calendarUri))
+    }
+
+    fun fromCalendarAppDialogBuilder() {
+        val dialogBuilder = AlertDialog.Builder(this)
+
+        // Set message of alert dialog
+        dialogBuilder.setMessage(getString(R.string.refresh_mirror_confirm))
+            // If the dialog is cancelable
+            .setCancelable(false)
+            // Positive button text and action
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                val url = getString(R.string.server_url) + "refresh"
+                putRequest(this, intent, url, "refresh")
+            }
+            // Negative button text and action
+            .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
+
+        // Create dialog box
+        val alert = dialogBuilder.create()
+        // Set title for alert dialog box
+        alert.setTitle(getString(R.string.welcome_back))
+        // Show alert dialog
+        alert.show()
     }
 
     fun getRequest(intent: Intent, context: Context, urlParam: String) {
@@ -142,7 +174,7 @@ open class BaseActivity : AppCompatActivity() {
                     intent.putExtra("brightness", brightness.toString())
                 }
                 // iCal Activity
-                if (urlParam == "iCal") {
+                if (urlParam == "calendar") {
                     val iCal = response.get("iCal").toString()
                     intent.putExtra("iCal", iCal)
                     intent.putExtra("initialSetup", false)
@@ -152,6 +184,7 @@ open class BaseActivity : AppCompatActivity() {
                     intent.putExtra("city", response.getString("city"))
                     intent.putExtra("state", response.getString("state"))
                     intent.putExtra("zipCode", response.getString("zip"))
+                    intent.putExtra("units", response.getString("units"))
                     intent.putExtra("homeAddress", response.getString("home"))
                     intent.putExtra("workSchoolAddress", response.getString("work"))
                 }
@@ -194,23 +227,24 @@ open class BaseActivity : AppCompatActivity() {
                         val dialogBuilder = AlertDialog.Builder(context)
 
                         // Set message of alert dialog
-                        dialogBuilder.setMessage("Do you want to keep this color?")
+                        dialogBuilder.setMessage(getString(R.string.keep_color_confirm))
                             // If the dialog is cancelable
                             .setCancelable(false)
                             // Positive button text and action
-                            .setPositiveButton("Keep Color") { _, _ ->
+                            .setPositiveButton(getString(R.string.keep_color)) { _, _ ->
                                 startActivity(intent)
                             }
                             // Negative button text and action
-                            .setNegativeButton("Choose New Color") { dialog, _ -> dialog.cancel() }
+                            .setNegativeButton(getString(R.string.choose_new_color)) { dialog, _ -> dialog.cancel() }
 
                         // Create dialog box
                         val alert = dialogBuilder.create()
                         // Set title for alert dialog box
-                        alert.setTitle("Color Confirmation")
+                        alert.setTitle(getString(R.string.color_confirmation))
                         // Show alert dialog
                         alert.show()
                     }
+                    // Other Activities
                 } else {
                     startActivity(intent)
                 }
@@ -226,7 +260,7 @@ open class BaseActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(context, getString(R.string.rest_put_error), Toast.LENGTH_LONG).show()
                 }
-                Log.d("Response", "LIGHTING TIMEOUT")
+                Log.d("Response", "TIMEOUT")
             }
         }
     }
