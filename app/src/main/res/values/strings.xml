@@ -2,6 +2,12 @@
 
     <!--    <string name=""></string>   -->
 
+    <!--TestStart-->
+    <string name="title_activity_test">Iskandar Companion App</string>
+    <string name="normal_start_button">Normal Start</string>
+    <string name="quick_start_button">Quick Start</string>
+    <string name="send_test_data_button">Send Test Data</string>
+
     <!--BT Activity-->
     <string name="bt_title">Find Your Mirror</string>
     <string name="bt_wifi_title">Enter Wifi Information</string>
@@ -23,11 +29,6 @@
     <!--Activity Names-->
     <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
     <string name="iskandar_home">Home</string>
-
-    <!--TestStart-->
-    <string name="normal_start_button">Normal Start</string>
-    <string name="quick_start_button">Quick Start</string>
-    <string name="send_test_data_button">Send Test Data</string>
 
     <string name="submit">Submit</string>
 
@@ -62,7 +63,7 @@
 
     <string name="weather_information">Weather Information</string>
     <string name="city">City</string>
-    <string name="state">State</string>
+    <!--<string name="state">State</string>-->
     <string name="ZIP_code">ZIP Code</string>
 
     <string name="fahrenheit">Fahrenheit</string>
@@ -106,12 +107,5 @@
     <string name="events">Events</string>
     <string name="refresh_mirror_confirm">Would you like to refresh the mirror?</string>
     <string name="welcome_back">Welcome Back</string>
-
-    <!--Original Factorial-->
-    <string name="title">This is just a template</string>
-    <string name="description">You can compute a factorial using the library-kotlin module. The result will be also shown in a notification using the library-android module.</string>
-    <string name="factorial_hint">Insert a number to compute his factorial</string>
-    <string name="compute">Compute</string>
-    <string name="title_activity_test">Iskandar Companion App</string>
 
 </resources>

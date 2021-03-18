@@ -2,18 +2,21 @@ package com.iskandar.mirror.companion.app.activities.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import com.iskandar.mirror.companion.app.classes.makeClearableEditText
 import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
 import kotlinx.android.synthetic.main.activity_location.*
-import kotlinx.android.synthetic.main.activity_location.nav_view
-import kotlinx.android.synthetic.main.activity_location.submitButton
 
 class LocationActivity : BaseActivity() {
 
     private var initialSetup = true
+    private var stateCodes = arrayOfNulls<String>(52) //  // 50 states + DC + blank
+    private var stateNames = arrayOfNulls<String>(52)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +47,10 @@ class LocationActivity : BaseActivity() {
         if (!zipCode.isNullOrEmpty() && !city.isNullOrEmpty() &&
             !homeAddress.isNullOrEmpty() && !workSchoolAddress.isNullOrEmpty()
         ) {
-            // Set edit texts to currently set values
+            // Set edit texts (and state spinner) to currently set values
             cityEditText.setText(city)
-            stateEditText.setText(state)
+            val statePos = stateCodes.indexOf(state)
+            stateSpinner.setSelection(statePos)
             zipCodeEditText.setText(zipCode)
             homeAddressEditText.setText(homeAddress)
             workSchoolAddressEditText.setText(workSchoolAddress)
@@ -62,9 +66,6 @@ class LocationActivity : BaseActivity() {
         addRightCancelDrawable(cityEditText)
         cityEditText.onRightDrawableClicked { it.text.clear() }
         cityEditText.makeClearableEditText(null, null)
-        addRightCancelDrawable(stateEditText)
-        stateEditText.onRightDrawableClicked { it.text.clear() }
-        stateEditText.makeClearableEditText(null, null)
         addRightCancelDrawable(zipCodeEditText)
         zipCodeEditText.onRightDrawableClicked { it.text.clear() }
         zipCodeEditText.makeClearableEditText(null, null)
@@ -75,18 +76,31 @@ class LocationActivity : BaseActivity() {
         workSchoolAddressEditText.onRightDrawableClicked { it.text.clear() }
         workSchoolAddressEditText.makeClearableEditText(null, null)
 
+        // State Spinner
+        stateNames = resources.getStringArray(R.array.states)
+        stateCodes = resources.getStringArray(R.array.stateCodes)
+
+        val dropdown = findViewById<View>(R.id.stateSpinner) as Spinner
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            this,
+            android.R.layout.simple_spinner_item,
+            stateNames
+        )
+        dropdown.adapter = adapter
+        // End State Spinner
+
         // Submit is pressed, run data validation
         var initialDataIsValid = true
         submitButton.setOnClickListener {
             // No city was entered
-            if (cityEditText.length() == 0) {
+            if (cityEditText.length() < 3) {
                 val failedString = getString(R.string.city_error_message)
                 Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
                 initialDataIsValid = false
             }
 
             // No state was entered
-            if (stateEditText.length() == 0) {
+            if (stateSpinner.selectedItemPosition == 0) {
                 val failedString = getString(R.string.state_error_message)
                 Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
                 initialDataIsValid = false
@@ -100,14 +114,14 @@ class LocationActivity : BaseActivity() {
             }
 
             // No home address was entered
-            if (homeAddressEditText.length() == 0) {
+            if (homeAddressEditText.length() < 5) {
                 val failedString = getString(R.string.home_address_error_message)
                 Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
                 initialDataIsValid = false
             }
 
             // No work or school address was entered
-            if (workSchoolAddressEditText.length() == 0) {
+            if (workSchoolAddressEditText.length() < 5) {
                 val failedString = getString(R.string.work_school_address_error_message)
                 Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
                 initialDataIsValid = false
@@ -130,7 +144,8 @@ class LocationActivity : BaseActivity() {
 
     private fun putLocationInformation(intent: Intent) {
         val city = cityEditText.text
-        val state = stateEditText.text
+        val statePos = stateSpinner.selectedItemPosition
+        val state = stateCodes[statePos]
         val zip = zipCodeEditText.text
 
         lateinit var temperature: String

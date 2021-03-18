@@ -175,8 +175,8 @@ open class BaseActivity : AppCompatActivity() {
                 }
                 // iCal Activity
                 if (urlParam == "calendar") {
-                    val iCal = response.get("iCal").toString()
-                    intent.putExtra("iCal", iCal)
+                    val iCal = response.get("ical").toString()
+                    intent.putExtra("iCalURL", iCal)
                     intent.putExtra("initialSetup", false)
                 }
                 // Location Activity

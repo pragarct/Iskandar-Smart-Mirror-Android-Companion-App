@@ -23,17 +23,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".activities.ui.ICalActivity">
-
-        </activity>
+            android:name=".activities.ui.ICalActivity"
+            android:label="@string/google_ical" />
         <activity
             android:name=".activities.ui.BluetoothActivity"
-            android:label="@string/bluetooth">
-        </activity>
+            android:label="@string/bluetooth" />
         <activity
             android:name=".activities.ui.LightingActivity"
-            android:label="@string/lighting">
-        </activity>
+            android:label="@string/lighting" />
         <activity
             android:name=".activities.ui.events.EventsOverviewActivity"
             android:label="@string/events" />
@@ -58,11 +55,9 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ui.OldMainActivity" />
     </application>
 
 </manifest>
