@@ -12,8 +12,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withSpinnerText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.iskandar.mirror.companion.app.classes.ToastMatcher.Companion.onToast
 import com.iskandar.mirror.companion.app.activities.ui.LocationActivity
+import com.iskandar.mirror.companion.app.classes.ToastMatcher.Companion.onToast
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.containsString
