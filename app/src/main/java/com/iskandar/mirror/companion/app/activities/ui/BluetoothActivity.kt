@@ -110,6 +110,10 @@ class BluetoothActivity : BaseActivity() {
                                 Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
                             }
 
+                            // Hey Ryan, this is the block of code you were gonna use
+                            // The method you want is called get setIPAddress, example use below
+                            // setIPAddress(IP_Address)
+
                             mmOutStream = tmpOut
 
                             val testingString = "THIS IS A TEST"

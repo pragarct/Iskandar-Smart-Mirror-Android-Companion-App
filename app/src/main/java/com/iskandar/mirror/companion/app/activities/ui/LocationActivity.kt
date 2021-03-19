@@ -135,14 +135,14 @@ class LocationActivity : BaseActivity() {
                     Intent(this, HomeActivity::class.java)
                 }
 
-                putLocationInformation(intent)
+                putLocationInformation(intent, initialSetup)
             }
 
             initialDataIsValid = true
         }
     }
 
-    private fun putLocationInformation(intent: Intent) {
+    private fun putLocationInformation(intent: Intent, initialSetup: Boolean) {
         val city = cityEditText.text
         val statePos = stateSpinner.selectedItemPosition
         val state = stateCodes[statePos]
@@ -157,6 +157,6 @@ class LocationActivity : BaseActivity() {
         val workSchoolAddress = workSchoolAddressEditText.text
         val url = getString(R.string.server_url) +
             "location?city=$city&state=$state&zip=$zip&home=$homeAddress&work=$workSchoolAddress&units=$temperature"
-        putRequest(this, intent, url, "location")
+        putRequest(this, intent, url, "location", initialSetup)
     }
 }

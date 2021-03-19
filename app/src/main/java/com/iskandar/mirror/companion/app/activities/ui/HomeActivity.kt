@@ -41,7 +41,6 @@ class HomeActivity : BaseActivity() {
         }
         bluetooth_button.setOnClickListener {
             val intent = Intent(this, BluetoothActivity::class.java)
-            // getRequest(intent, this, "bluetooth")
             startActivity(intent)
         }
         settings_button.setOnClickListener {

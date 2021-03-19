@@ -29,6 +29,7 @@ import com.iskandar.mirror.companion.app.activities.ui.ICalActivity
 import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
 import com.iskandar.mirror.companion.app.activities.ui.LocationActivity
 import com.iskandar.mirror.companion.app.activities.ui.SettingsActivity
+import com.iskandar.mirror.companion.app.data.IPAddressSharedPreference
 import kotlinx.android.synthetic.main.activity_home.drawer_layout
 import kotlinx.android.synthetic.main.activity_home.nav_view
 import org.jetbrains.anko.doAsync
@@ -39,6 +40,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
 private var fromCalendarApp = false
+private var IP_Address = "http://10.0.2.2:5000/"
 
 open class BaseActivity : AppCompatActivity() {
     // Navigation Bar
@@ -131,7 +133,7 @@ open class BaseActivity : AppCompatActivity() {
             // Positive button text and action
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 val url = getString(R.string.server_url) + "refresh"
-                putRequest(this, intent, url, "refresh")
+                putRequest(this, intent, url, "refresh", false)
             }
             // Negative button text and action
             .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
@@ -157,6 +159,12 @@ open class BaseActivity : AppCompatActivity() {
 
             try {
                 val response = future.get(500, TimeUnit.MILLISECONDS) // this will block
+                var welcomeConfigure = false
+
+                // Welcome Activity
+                if (urlParam == "configured") {
+                    welcomeConfigure = response.get("is_configured").toString().toBoolean()
+                }
                 // Lighting Activity
                 if (urlParam == "lighting") {
                     val red = response.get("red")
@@ -186,7 +194,14 @@ open class BaseActivity : AppCompatActivity() {
                     intent.putExtra("workSchoolAddress", response.getString("work"))
                 }
 
-                startActivity(intent)
+                // Start activity unless its the welcome activity and file is not configured
+                if (urlParam != "configured" || welcomeConfigure) {
+                    startActivity(intent)
+                }
+                // Prevent using from backing if initial setup is complete
+                if (urlParam == "configured" && welcomeConfigure) {
+                    finish()
+                }
             } catch (e: InterruptedException) {
                 runOnUiThread {
                     Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
@@ -203,7 +218,7 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun putRequest(context: Context, intent: Intent, url: String, param: String) {
+    fun putRequest(context: Context, intent: Intent, url: String, param: String, initialSetup: Boolean) {
         doAsync {
             // Instantiate the RequestQueue.
             val queue = Volley.newRequestQueue(context)
@@ -244,6 +259,9 @@ open class BaseActivity : AppCompatActivity() {
                     // Other Activities
                 } else {
                     startActivity(intent)
+                    if (initialSetup) {
+                        finish()
+                    }
                 }
             } catch (e: InterruptedException) {
                 runOnUiThread {
@@ -311,5 +329,16 @@ open class BaseActivity : AppCompatActivity() {
         val cancel = ContextCompat.getDrawable(this, R.drawable.cancel)
         cancel?.setBounds(0, 0, cancel.intrinsicWidth, cancel.intrinsicHeight)
         editText.setCompoundDrawables(null, null, cancel, null)
+    }
+
+    fun getIPAddress(): String? {
+        val myPreference = IPAddressSharedPreference(this)
+        return myPreference.getIPAddress()
+    }
+
+    fun setIPAddress(ipAddressInput: String) {
+        val myPreference = IPAddressSharedPreference(this)
+        myPreference.setIPAddress(ipAddressInput)
+        IP_Address = ipAddressInput
     }
 }

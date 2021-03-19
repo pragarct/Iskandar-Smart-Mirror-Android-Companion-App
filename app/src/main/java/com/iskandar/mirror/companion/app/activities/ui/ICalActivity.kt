@@ -72,7 +72,7 @@ class ICalActivity : BaseActivity() {
                     Intent(this, HomeActivity::class.java)
                 }
 
-                putGoogleCalenderLink(intent)
+                putGoogleCalenderLink(intent, initialSetup)
             } else {
                 val failedString = getString(R.string.ical_error_message)
                 Toast.makeText(this, failedString, Toast.LENGTH_LONG).show()
@@ -82,10 +82,10 @@ class ICalActivity : BaseActivity() {
         }
     }
 
-    private fun putGoogleCalenderLink(intent: Intent) {
+    private fun putGoogleCalenderLink(intent: Intent, initialSetup: Boolean) {
         val iCalLink = googleiCalEditText.text.toString()
         val url = getString(R.string.server_url) + "calendar?url=$iCalLink"
         // TO DO similar setup to location setup for changing intent?
-        putRequest(this, intent, url, "calendar")
+        putRequest(this, intent, url, "calendar", initialSetup)
     }
 }

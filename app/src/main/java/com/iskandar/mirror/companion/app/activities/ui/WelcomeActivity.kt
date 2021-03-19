@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.activity_welcome.*
 class WelcomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val configuredIntent = Intent(this, HomeActivity::class.java)
+        getRequest(configuredIntent, this, "configured")
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -19,12 +22,14 @@ class WelcomeActivity : BaseActivity() {
         normalStart.setOnClickListener {
             val intent = Intent(this, LocationActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         // Create listener for quick starting the app (default data)
         quickStart.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         // Create listener for help floating action button
