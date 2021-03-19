@@ -8,26 +8,11 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="@string/home" />
-
-        <item
-            android:id="@+id/nav_alarms"
-            android:icon="@drawable/ic_alarm"
-            android:title="@string/alarms" />
-
-        <item
-            android:id="@+id/nav_reminders"
-            android:icon="@drawable/ic_reminders"
-            android:title="@string/reminders" />
-
-        <item
-            android:id="@+id/nav_background"
-            android:icon="@drawable/ic_image"
-            android:title="@string/background" />
+            android:title="@string/iskandar_home" />
 
         <item
             android:id="@+id/nav_lighting"
-            android:icon="@drawable/ic_color"
+            android:icon="@drawable/ic_lighting"
             android:title="@string/lighting" />
 
         <item
@@ -36,8 +21,18 @@
             android:title="@string/events" />
 
         <item
+            android:id="@+id/nav_background"
+            android:icon="@drawable/ic_background"
+            android:title="@string/background" />
+
+        <item
+            android:id="@+id/nav_ical_link"
+            android:icon="@drawable/ic_ical_link"
+            android:title="@string/ical_link" />
+
+        <item
             android:id="@+id/nav_location"
-            android:icon="@drawable/ic_map"
+            android:icon="@drawable/ic_location"
             android:title="@string/location" />
 
         <item
@@ -46,8 +41,13 @@
             android:title="@string/bluetooth" />
 
         <item
-            android:id="@+id/nav_gmail"
-            android:icon="@drawable/ic_gmail"
-            android:title="@string/gmail" />
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help"
+            android:title="@string/help" />
     </group>
 </menu>

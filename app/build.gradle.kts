@@ -59,6 +59,7 @@ dependencies {
     implementation("com.github.QuadFlask:colorpicker:0.0.15")
     implementation("com.android.volley:volley:1.2.0")
     implementation("org.jetbrains.anko:anko-common:0.9")
+    implementation("androidx.preference:preference:1.1.1")
 
     testImplementation(TestingLib.JUNIT)
 

@@ -29,7 +29,7 @@ class ICalActivity : BaseActivity() {
         } else {
             setUpNavigationBar()
             // Highlights the item in the navigation bar
-            nav_view.setCheckedItem(R.id.nav_gmail)
+            nav_view.setCheckedItem(R.id.nav_ical_link)
         }
 
         setupListenersAndEditTexts()

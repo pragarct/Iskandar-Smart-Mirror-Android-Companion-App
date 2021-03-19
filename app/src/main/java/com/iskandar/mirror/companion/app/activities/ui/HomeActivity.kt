@@ -3,8 +3,6 @@ package com.iskandar.mirror.companion.app.activities.ui
 import android.content.Intent
 import android.os.Bundle
 import com.iskandar.mirror.companion.app.R
-import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
-import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
 import com.iskandar.mirror.companion.app.classes.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -19,21 +17,6 @@ class HomeActivity : BaseActivity() {
         nav_view.setCheckedItem(R.id.nav_home)
 
         // Set up listeners for tile buttons
-        alarms_button.setOnClickListener {
-            val intent = Intent(this, AlarmOverviewActivity::class.java)
-            // getRequest(intent, this, "alarms")
-            startActivity(intent)
-        }
-        reminders_button.setOnClickListener {
-            val intent = Intent(this, RemindersOverviewActivity::class.java)
-            // getRequest(intent, this, "reminders")
-            startActivity(intent)
-        }
-        background_button.setOnClickListener {
-            val intent = Intent(this, BackgroundOverviewActivity::class.java)
-            // getRequest(intent, this, "background")
-            startActivity(intent)
-        }
         lighting_button.setOnClickListener {
             val intent = Intent(this, LightingActivity::class.java)
             getRequest(intent, this, "lighting")
@@ -42,6 +25,16 @@ class HomeActivity : BaseActivity() {
             fromCalendarApp = true
             openGoogleCalenderApp()
         }
+        background_button.setOnClickListener {
+            // TO DO
+            // val intent = Intent(this, BackgroundOverviewActivity::class.java)
+            // getRequest(intent, this, "background")
+            // startActivity(intent)
+        }
+        ical_link_button.setOnClickListener {
+            val intent = Intent(this, ICalActivity::class.java)
+            getRequest(intent, this, "calendar")
+        }
         change_location_button.setOnClickListener {
             val intent = Intent(this, LocationActivity::class.java)
             getRequest(intent, this, "location")
@@ -49,6 +42,14 @@ class HomeActivity : BaseActivity() {
         bluetooth_button.setOnClickListener {
             val intent = Intent(this, BluetoothActivity::class.java)
             // getRequest(intent, this, "bluetooth")
+            startActivity(intent)
+        }
+        settings_button.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+        help_button.setOnClickListener {
+            val intent = Intent(this, HelpActivity::class.java)
             startActivity(intent)
         }
     }

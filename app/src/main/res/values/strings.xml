@@ -2,50 +2,45 @@
 
     <!--    <string name=""></string>   -->
 
-    <!--TestStart-->
-    <string name="title_activity_test">Iskandar Companion App</string>
-    <string name="normal_start_button">Normal Start</string>
-    <string name="quick_start_button">Quick Start</string>
-    <string name="send_test_data_button">Send Test Data</string>
 
-    <!--BT Activity-->
-    <string name="bt_title">Find Your Mirror</string>
-    <string name="bt_wifi_title">Enter Wifi Information</string>
-    <string name="bt_ssid">SSID: </string>
-    <string name="bt_ssid_input"> </string>
-    <string name="bt_password">Password: </string>
-    <string name="bt_password_hint"> </string>
-    <string name="disc_title">Discovered Devices:</string>
-    <string name="btn_visible">Find Visible</string>
-    <string name="btn_enter_wifi">Enter</string>
+    <!--Emulator URL-->
+    <string name="server_url">http://10.0.2.2:5000/</string>
+    <!--Phone URL-->
+    <!--<string name="server_url">localhost:5000/</string>-->
+
 
     <!--Universal-->
-    <string name="app_name">Iskandar Companion App</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
-    <!--Activity Names-->
-    <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
-    <string name="iskandar_home">Home</string>
-
     <string name="submit">Submit</string>
 
-    <!--Home-->
-    <string name="home">Home</string>
 
-    <!--Alarms-->
-    <string name="alarms">Alarms</string>
-
-    <!--Reminders-->
-    <string name="reminders">Reminders</string>
-
-    <!--Background-->
+    <!--Activity Names-->
+    <string name="app_name">Iskandar Companion App</string>
+    <string name="iskandar_initial_setup">Iskandar Initial Setup</string>
+    <string name="iskandar_home">Home</string>
+    <string name="lighting">Lighting</string>
+    <string name="events">Events</string>
     <string name="background">Background</string>
+    <string name="ical_link">iCal Link</string>
+    <string name="location">Location</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help</string>
+
+
+    <!--Activity Titles-->
+
+
+    <!--Welcome-->
+    <string name="title_activity_test">Iskandar Companion App</string>
+    <string name="normal_start_button">Normal Start</string>
+    <string name="quick_start_button">Quick Start</string>
+
 
     <!--Lighting-->
-    <string name="lighting">Lighting</string>
     <string name="lightness">Lightness</string>
     <string name="brightness">Brightness</string>
     <string name="manual">Manual</string>
@@ -57,9 +52,25 @@
     <string name="keep_color">Keep Color</string>
     <string name="choose_new_color">Choose New Color</string>
 
+
+    <!--Events-->
+    <string name="refresh_mirror_confirm">Would you like to refresh the mirror?</string>
+    <string name="welcome_back">Welcome Back</string>
+
+
+    <!--iCal Link-->
+    <string name="google_ical">Google iCal Link</string>
+    <string name="google_ical_explanation">What is a Google iCal Link?\nA Google iCal Link is a link that will be used to link Iskandar to your Google Calendar.</string>
+    <string name="google_ical_step1">1. Click this link https://calendar.google.com/calendar/u/0/r</string>
+    <string name="google_ical_step2">2. Under the "My calendars" section on the left side, hover over your username.</string>
+    <string name="google_ical_step3">3. Click the three dots and then click "Settings and sharing".</string>
+    <string name="google_ical_step4">4. Scroll down to the "Secret address in iCal format"</string>
+    <string name="google_ical_step5">5. Copy that link and paste it in the textbox below"</string>
+    <string name="ical_error_message">Please enter a valid iCal link.</string>
+
+
     <!--Change Location-->
     <string name="change_location">Change Location</string>
-    <string name="location">Location</string>
 
     <string name="weather_information">Weather Information</string>
     <string name="city">City</string>
@@ -80,32 +91,38 @@
     <string name="home_address_error_message">Please enter a home address.</string>
     <string name="work_school_address_error_message">Please enter either your work or school address.</string>
 
-    <!--Bluetooth-->
-    <string name="bluetooth">Bluetooth</string>
+
+    <!--BT Activity-->
+    <string name="bt_title">Find Your Mirror</string>
+    <string name="bt_wifi_title">Enter Wifi Information</string>
+    <string name="bt_ssid">SSID: </string>
+    <string name="bt_ssid_input"> </string>
+    <string name="bt_password">Password: </string>
+    <string name="bt_password_hint"> </string>
+    <string name="disc_title">Discovered Devices:</string>
+    <string name="btn_visible">Find Visible</string>
+    <string name="btn_enter_wifi">Enter</string>
+
 
     <!--Rest-->
     <string name="rest_get_error">Could not load information from Iskandar.  Please try again.</string>
     <string name="rest_put_error">Could not send information to Iskandar.  Please try again.</string>
 
-    <!--Emulator URL-->
-    <string name="server_url">http://10.0.2.2:5000/</string>
-    <!--Phone URL-->
-    <!--<string name="server_url">localhost:5000/</string>-->
 
-    <!--Change Gmail-->
-    <string name="gmail">Gmail</string>
-    <string name="google_ical">Google iCal Link</string>
-    <string name="google_ical_explanation">What is a Google iCal Link?\nA Google iCal Link is a link that will be used to link Iskandar to your Google Calendar.</string>
-    <string name="google_ical_step1">1. Click this link https://calendar.google.com/calendar/u/0/r</string>
-    <string name="google_ical_step2">2. Under the "My calendars" section on the left side, hover over your username.</string>
-    <string name="google_ical_step3">3. Click the three dots and then click "Settings and sharing".</string>
-    <string name="google_ical_step4">4. Scroll down to the "Secret address in iCal format"</string>
-    <string name="google_ical_step5">5. Copy that link and paste it in the textbox below"</string>
-    <string name="ical_error_message">Please enter a valid iCal link.</string>
 
-    <!--Events-->
-    <string name="events">Events</string>
-    <string name="refresh_mirror_confirm">Would you like to refresh the mirror?</string>
-    <string name="welcome_back">Welcome Back</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 </resources>

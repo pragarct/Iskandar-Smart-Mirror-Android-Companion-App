@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ui.TestActivity">
+    tools:context=".activities.ui.WelcomeActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -31,24 +31,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/normalStart" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sendTestData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="@string/send_test_data_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quickStart" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/help_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:importantForAccessibility="no"
         android:padding="8dp"
+        app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_help" />

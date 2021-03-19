@@ -30,142 +30,6 @@
 
             <!-- Column 1 -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/alarms_button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:id="@+id/alarms_linear_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:id="@+id/alarms_image"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_alarm"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/alarms_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/alarms"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Column 2 -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/reminders_button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:id="@+id/reminders_linear_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:id="@+id/reminders_image"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_reminders"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/reminders_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/reminders"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <!-- Row 2 -->
-
-            <!-- Column 1 -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/background_button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-
-                <LinearLayout
-                    android:id="@+id/background_linear_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:id="@+id/background_image"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_image"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/background_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/background"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="ContentDescription" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Column 2 -->
-            <androidx.cardview.widget.CardView
                 android:id="@+id/lighting_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -191,7 +55,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_color"
+                        android:src="@drawable/ic_lighting"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -208,10 +72,7 @@
 
             </androidx.cardview.widget.CardView>
 
-
-            <!-- Row 2 -->
-
-            <!-- Column 1 -->
+            <!-- Column 2 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/events_button"
                 android:layout_width="0dp"
@@ -255,7 +116,102 @@
 
             </androidx.cardview.widget.CardView>
 
+
+            <!-- Row 2 -->
+
+            <!-- Column 1 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/background_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/background_linear_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/background_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_background"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/background_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/background"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="ContentDescription" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <!-- Column 2 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ical_link_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/ical_link_linear_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/ical_link_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_ical_link"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/ical_link_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ical_link"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- Row 3 -->
+
+            <!-- Column 1 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/change_location_button"
                 android:layout_width="0dp"
@@ -282,7 +238,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_map"
+                        android:src="@drawable/ic_location"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -299,6 +255,7 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Column 2 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/bluetooth_button"
                 android:layout_width="0dp"
@@ -342,8 +299,11 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Row 4 -->
+
+            <!-- Column 1 -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/info_button"
+                android:id="@+id/settings_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
@@ -355,7 +315,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
-                    android:id="@+id/info_linear_layout"
+                    android:id="@+id/settings_linear_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
@@ -364,19 +324,63 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:id="@+id/info_image"
+                        android:id="@+id/settings_image"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_info"
+                        android:src="@drawable/ic_settings"
                         tools:ignore="ContentDescription" />
 
                     <TextView
-                        android:id="@+id/info_text_view"
+                        android:id="@+id/settings_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home"
+                        android:text="@string/settings"
                         android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            
+            <!-- Column 2 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/help_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/help_linear_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/help_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_help"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/help_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/help"
+                        android:layout_gravity="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />

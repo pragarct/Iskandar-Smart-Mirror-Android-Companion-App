@@ -22,14 +22,13 @@ import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.iskandar.mirror.companion.app.R
-import com.iskandar.mirror.companion.app.activities.ui.BackgroundOverviewActivity
 import com.iskandar.mirror.companion.app.activities.ui.BluetoothActivity
+import com.iskandar.mirror.companion.app.activities.ui.HelpActivity
 import com.iskandar.mirror.companion.app.activities.ui.HomeActivity
 import com.iskandar.mirror.companion.app.activities.ui.ICalActivity
 import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
 import com.iskandar.mirror.companion.app.activities.ui.LocationActivity
-import com.iskandar.mirror.companion.app.activities.ui.alarms.AlarmOverviewActivity
-import com.iskandar.mirror.companion.app.activities.ui.reminders.RemindersOverviewActivity
+import com.iskandar.mirror.companion.app.activities.ui.SettingsActivity
 import kotlinx.android.synthetic.main.activity_home.drawer_layout
 import kotlinx.android.synthetic.main.activity_home.nav_view
 import org.jetbrains.anko.doAsync
@@ -58,21 +57,6 @@ open class BaseActivity : AppCompatActivity() {
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.nav_alarms -> {
-                    val intent = Intent(this, AlarmOverviewActivity::class.java)
-                    startActivity(intent)
-                    // getRequest(intent, this, "alarms")
-                }
-                R.id.nav_reminders -> {
-                    val intent = Intent(this, RemindersOverviewActivity::class.java)
-                    startActivity(intent)
-                    // getRequest(intent, this, "reminders")
-                }
-                R.id.nav_background -> {
-                    val intent = Intent(this, BackgroundOverviewActivity::class.java)
-                    startActivity(intent)
-                    // getRequest(intent, this, "background_image")
-                }
                 R.id.nav_lighting -> {
                     val intent = Intent(this, LightingActivity::class.java)
                     getRequest(intent, this, "lighting")
@@ -81,6 +65,16 @@ open class BaseActivity : AppCompatActivity() {
                     fromCalendarApp = true
                     openGoogleCalenderApp()
                 }
+                R.id.nav_background -> {
+                    // TO DO
+                    // val intent = Intent(this, BackgroundOverviewActivity::class.java)
+                    // startActivity(intent)
+                    // getRequest(intent, this, "background_image")
+                }
+                R.id.nav_ical_link -> {
+                    val intent = Intent(this, ICalActivity::class.java)
+                    getRequest(intent, this, "calendar")
+                }
                 R.id.nav_location -> {
                     val intent = Intent(this, LocationActivity::class.java)
                     getRequest(intent, this, "location")
@@ -88,11 +82,14 @@ open class BaseActivity : AppCompatActivity() {
                 R.id.nav_bluetooth -> {
                     val intent = Intent(this, BluetoothActivity::class.java)
                     startActivity(intent)
-                    // getRequest(intent, this, "bluetooth")
                 }
-                R.id.nav_gmail -> {
-                    val intent = Intent(this, ICalActivity::class.java)
-                    getRequest(intent, this, "calendar")
+                R.id.nav_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_help -> {
+                    val intent = Intent(this, HelpActivity::class.java)
+                    startActivity(intent)
                 }
             }
             true

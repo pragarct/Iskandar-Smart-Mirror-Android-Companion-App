@@ -23,6 +23,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".activities.ui.SettingsActivity"
+            android:label="@string/settings" />
+        <activity
+            android:name=".activities.ui.HelpActivity"
+            android:label="@string/help" />
+        <activity
             android:name=".activities.ui.ICalActivity"
             android:label="@string/google_ical" />
         <activity
@@ -32,29 +38,18 @@
             android:name=".activities.ui.LightingActivity"
             android:label="@string/lighting" />
         <activity
-            android:name=".activities.ui.events.EventsOverviewActivity"
-            android:label="@string/events" />
-        <activity
             android:name=".activities.ui.LocationActivity"
             android:label="@string/change_location" />
-        <activity
-            android:name=".activities.ui.BackgroundOverviewActivity"
-            android:label="@string/background" />
-        <activity
-            android:name=".activities.ui.reminders.RemindersOverviewActivity"
-            android:label="@string/reminders" />
-        <activity
-            android:name=".activities.ui.alarms.AlarmOverviewActivity"
-            android:label="@string/alarms" />
         <activity
             android:name=".activities.ui.HomeActivity"
             android:label="@string/iskandar_home" />
         <activity
-            android:name=".activities.ui.TestActivity"
+            android:name=".activities.ui.WelcomeActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

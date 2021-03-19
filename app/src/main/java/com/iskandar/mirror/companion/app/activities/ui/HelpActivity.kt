@@ -3,14 +3,13 @@ package com.iskandar.mirror.companion.app.activities.ui
 import android.os.Bundle
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
-import kotlinx.android.synthetic.main.activity_background_overview.*
+import kotlinx.android.synthetic.main.activity_ical.*
 
-class BackgroundOverviewActivity : BaseActivity() {
+class HelpActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_background_overview)
+        setContentView(R.layout.activity_help)
         setUpNavigationBar()
-        // Highlights the item in the navigation bar
-        nav_view.setCheckedItem(R.id.nav_background)
+        nav_view.setCheckedItem(R.id.nav_help)
     }
 }
