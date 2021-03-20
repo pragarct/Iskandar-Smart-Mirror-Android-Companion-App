@@ -32,12 +32,45 @@
     <string name="help">Help</string>
 
 
+    <!--Splash-->
+    <string name="welcome">Welcome</string>
+    <string name="authors">Created by the Masters of Mirrors</string>
+    <string name="retry_connection">Retry Connection</string>
+
     <!--Welcome-->
     <string name="title_activity_test">Iskandar Companion App</string>
     <string name="get_started">Get Started</string>
-    <string name="retry_connection">Retry Connection</string>
-    <string name="welcome_help_title">Welcome to the Iskandar Companion App!</string>
-    <string name="welcome_help_desc">Enter Personal Info - \n\nUse Default Data - Use pre-defined information for weather and traffic.  Can be changed later.</string>
+    <string name="welcome_title">Welcome to the Iskandar Companion App!</string>
+    <string name="welcome_desc">You will need the following information to setup Iskandar the Smart Mirror:</string>
+    <string name="welcome_help_title">Any Questions?</string>
+    <string name="welcome_help_desc">Contact us at Iskandarce05@gmail.com if you have any questions or encounter a problem.</string>
+    <string name="bluetooth_information">Bluetooth Information</string>
+    <string name="bluetooth_list">
+        <ul>
+            <li>   WiFi SSID (Name)\n</li>
+            <li>   WiFi Password</li>
+        </ul>
+    </string>
+    <string name="weather_list">
+        <ul>
+            <li>   City\n</li>
+            <li>   State\n</li>
+            <li>   ZIP Code</li>
+        </ul>
+    </string>
+    <string name="traffic_list">
+        <ul>
+            <li>   Home Address\n</li>
+            <li>   Work/School Address</li>
+        </ul>
+    </string>
+    <string name="google_calendar_information">Google Calendar Information</string>
+    <string name="google_calendar_list">
+        <ul>
+            <li>   iCal Link</li>
+        </ul>
+    </string>
+
     <string name="welcome_connection_error_title">Something Went Wrong</string>
     <string name="welcome_connection_error_desc">The connection to the server timed out.  Make sure you are near your mirror and try connecting again.</string>
 

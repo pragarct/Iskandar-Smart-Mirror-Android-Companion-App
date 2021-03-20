@@ -10,35 +10,143 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <TextView
+        android:id="@+id/welcomeTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginTop="@dimen/marginTopMedium"
+        android:padding="8dp"
+        android:text="@string/welcome_title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <TextView
+        android:id="@+id/welcomeDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:text="@string/welcome_desc"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcomeTitleTextView" />
+
+    <TextView
+        android:id="@+id/bluetoothInformationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/bluetooth_information"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcomeDescriptionTextView" />
+
+    <TextView
+        android:id="@+id/bluetoothListTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/bluetooth_list"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bluetoothInformationTextView" />
+
+    <TextView
+        android:id="@+id/weatherInformationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="40dp"
+        android:text="@string/weather_information"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bluetoothInformationTextView" />
+
+    <TextView
+        android:id="@+id/weatherListTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/weather_list"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weatherInformationTextView" />
+
+    <TextView
+        android:id="@+id/trafficInformationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="58dp"
+        android:text="@string/traffic_information"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weatherInformationTextView" />
+
+    <TextView
+        android:id="@+id/trafficListTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/traffic_list"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trafficInformationTextView" />
+
+    <TextView
+        android:id="@+id/googleCalendarInformationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="40dp"
+        android:text="@string/google_calendar_information"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trafficInformationTextView" />
+
+    <TextView
+        android:id="@+id/googleCalendarListTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/google_calendar_list"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/googleCalendarInformationTextView" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/getStartedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopMedium"
         android:padding="@dimen/buttonPadding"
         android:paddingStart="@dimen/buttonPaddingStartEnd"
         android:paddingEnd="@dimen/buttonPaddingStartEnd"
         android:text="@string/get_started"
         android:textSize="@dimen/buttonText"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/retryConnectionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
-        android:padding="@dimen/buttonPadding"
-        android:paddingStart="@dimen/buttonPaddingStartEnd"
-        android:paddingEnd="@dimen/buttonPaddingStartEnd"
-        android:text="@string/retry_connection"
-        android:textSize="@dimen/buttonText"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getStartedButton" />
+        app:layout_constraintTop_toBottomOf="@id/googleCalendarListTextView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/help_fab"

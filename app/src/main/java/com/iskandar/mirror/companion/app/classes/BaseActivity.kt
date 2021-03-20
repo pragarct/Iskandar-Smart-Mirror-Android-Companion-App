@@ -31,7 +31,7 @@ import com.iskandar.mirror.companion.app.data.IPAddressSharedPreference
 import com.iskandar.mirror.companion.app.data.IsConfiguredSharedPreference
 import kotlinx.android.synthetic.main.activity_home.drawer_layout
 import kotlinx.android.synthetic.main.activity_home.nav_view
-import kotlinx.android.synthetic.main.activity_welcome.*
+import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.util.Locale
@@ -222,6 +222,7 @@ open class BaseActivity : AppCompatActivity() {
                                 getString(R.string.welcome_connection_error_title)
                             )
                             retryConnectionButton.visibility = View.VISIBLE
+                            progressBar.visibility = View.INVISIBLE
                         }
                     } else {
                         Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()

@@ -10,12 +10,6 @@ import kotlinx.android.synthetic.main.activity_welcome.*
 class WelcomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val isConfigured = getIsConfigured()
-        if (isConfigured) {
-            val configuredIntent = Intent(this, HomeActivity::class.java)
-            getRequest(configuredIntent, this, "configured")
-        }
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -26,13 +20,8 @@ class WelcomeActivity : BaseActivity() {
             startActivity(intent)
         }
 
-        retryConnectionButton.setOnClickListener {
-            val configuredIntent = Intent(this, HomeActivity::class.java)
-            getRequest(configuredIntent, this, "configured")
-        }
-
         // Create listener for help floating action button
-        findViewById<FloatingActionButton>(R.id.help_fab).setOnClickListener { view ->
+        findViewById<FloatingActionButton>(R.id.help_fab).setOnClickListener {
             createDialog(
                 getString(R.string.welcome_help_desc),
                 getString(R.string.okay),
