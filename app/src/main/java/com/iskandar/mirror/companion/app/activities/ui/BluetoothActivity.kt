@@ -118,7 +118,7 @@ class BluetoothActivity : BaseActivity() {
                             // Connect to the remote device through the socket. This call blocks
                             // until it succeeds or throws an exception.
                             socket.connect()
-                            Toast.makeText(applicationContext, "Connected to Iskandar", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.bt_connection_success), Toast.LENGTH_SHORT).show()
 
                             var tmpOut: OutputStream? = null
 
@@ -127,7 +127,11 @@ class BluetoothActivity : BaseActivity() {
                             try {
                                 tmpOut = socket.outputStream
                             } catch (e: IOException) {
-                                Toast.makeText(applicationContext, "Failed to register OutputStream to Iskandar. Please make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    getString(R.string.bt_output_stream_failure),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
 
                             mmOutStream = tmpOut
@@ -143,13 +147,13 @@ class BluetoothActivity : BaseActivity() {
                             try {
                                 mmOutStream?.write(ssidByteArray)
                             } catch (e: IOException) {
-                                Toast.makeText(applicationContext, "Failed to send SSID. Make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, getString(R.string.bt_ssid_failure), Toast.LENGTH_SHORT).show()
                             }
 
                             try {
                                 mmOutStream?.write(passByteArray)
                             } catch (e: IOException) {
-                                Toast.makeText(applicationContext, "Failed to send Password. Make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, getString(R.string.bt_password_failure), Toast.LENGTH_SHORT).show()
                             }
 
                             var tmpIn: InputStream? = null
@@ -159,7 +163,11 @@ class BluetoothActivity : BaseActivity() {
                             try {
                                 tmpIn = socket.inputStream
                             } catch (e: IOException) {
-                                Toast.makeText(applicationContext, "Failed to register InputStream to Iskandar. Please make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    getString(R.string.bt_input_stream_failure),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
 
                             mmInStream = tmpIn
@@ -169,7 +177,11 @@ class BluetoothActivity : BaseActivity() {
                             try {
                                 ipAddress = mmInStream?.readBytes()
                             } catch (e: IOException) {
-                                Toast.makeText(applicationContext, "Failed to obtain device IP. Make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    getString(R.string.bt_ip_address_failure),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
 
                             var ipString = ipAddress.toString()
@@ -178,7 +190,7 @@ class BluetoothActivity : BaseActivity() {
 
                             setIPAddress(ipString)
 
-                            Toast.makeText(applicationContext, "Successfully Sent Network Information", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.bt_sent_info_success), Toast.LENGTH_SHORT).show()
 
                             val intent: Intent = if (initialSetup) {
                                 Intent(this, LocationActivity::class.java)
@@ -191,7 +203,7 @@ class BluetoothActivity : BaseActivity() {
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
-                    Toast.makeText(applicationContext, "Could Not Connect to Iskandar Mirror. Please make sure you are paired.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.bt_connection_failure), Toast.LENGTH_SHORT).show()
                 }
             }
         }

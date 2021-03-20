@@ -4,7 +4,7 @@
 
 
     <!--Emulator URL-->
-    <string name="server_url">http://10.0.2.2:5000/</string>
+    <!--<string name="server_url">http://10.0.2.2:5000/</string>-->
     <!--Phone URL-->
     <!--<string name="server_url">localhost:5000/</string>-->
 
@@ -140,6 +140,15 @@
     <string name="disc_title">Discovered Devices:</string>
     <string name="btn_visible">Find Visible</string>
     <string name="btn_enter_wifi">Enter</string>
+
+    <string name="bt_connection_success">Connected to Iskandar</string>
+    <string name="bt_output_stream_failure">Failed to register OutputStream to Iskandar. Please make sure you are paired to the device.</string>
+    <string name="bt_ssid_failure">Failed to send SSID. Make sure you are paired to the device.</string>
+    <string name="bt_password_failure">Failed to send Password. Make sure you are paired to the device.</string>
+    <string name="bt_input_stream_failure">Failed to register InputStream to Iskandar. Please make sure you are paired to the device.</string>
+    <string name="bt_ip_address_failure">Failed to obtain device IP. Make sure you are paired to the device.</string>
+    <string name="bt_sent_info_success">Successfully Sent Network Information</string>
+    <string name="bt_connection_failure">Could Not Connect to Iskandar Mirror. Please make sure you are paired.</string>
 
 
     <!--Rest-->
