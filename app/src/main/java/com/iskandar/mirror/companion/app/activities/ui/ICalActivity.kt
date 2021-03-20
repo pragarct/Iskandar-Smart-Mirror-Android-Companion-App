@@ -84,7 +84,7 @@ class ICalActivity : BaseActivity() {
 
     private fun putGoogleCalenderLink(intent: Intent, initialSetup: Boolean) {
         val iCalLink = googleiCalEditText.text.toString()
-        val url = getString(R.string.server_url) + "calendar?url=$iCalLink"
+        val url = getIPAddress() + "calendar?url=$iCalLink"
         putRequest(this, intent, url, "calendar", initialSetup)
     }
 }

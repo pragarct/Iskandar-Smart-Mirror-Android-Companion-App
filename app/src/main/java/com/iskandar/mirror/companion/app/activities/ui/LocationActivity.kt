@@ -155,7 +155,7 @@ class LocationActivity : BaseActivity() {
 
         val homeAddress = homeAddressEditText.text
         val workSchoolAddress = workSchoolAddressEditText.text
-        val url = getString(R.string.server_url) +
+        val url = getIPAddress() +
             "location?city=$city&state=$state&zip=$zip&home=$homeAddress&work=$workSchoolAddress&units=$temperature"
         putRequest(this, intent, url, "location", initialSetup)
     }

@@ -154,7 +154,7 @@ class LightingActivity : BaseActivity() {
         // Convert to hex
         val hexColor = String.format("%06X", 0xFFFFFF and colorPickerView.selectedColor)
         val brightness = (colorPickerView.selectedColor.alpha / 2.55).toInt()
-        val url = getString(R.string.server_url) + "lighting?rgb=$hexColor&brightness=$brightness"
+        val url = getIPAddress() + "lighting?rgb=$hexColor&brightness=$brightness"
         putRequest(this, intent, url, "lighting", false)
     }
 

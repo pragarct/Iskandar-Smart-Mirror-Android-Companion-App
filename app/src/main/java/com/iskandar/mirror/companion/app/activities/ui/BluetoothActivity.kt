@@ -19,6 +19,7 @@ import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
 import kotlinx.android.synthetic.main.activity_bluetooth.*
 import kotlinx.android.synthetic.main.activity_bluetooth.nav_view
 import java.io.IOException
+import java.io.InputStream
 import java.io.OutputStream
 import java.util.UUID
 import kotlin.collections.ArrayList
@@ -33,7 +34,9 @@ lateinit var adapter: ArrayAdapter<String>
 class BluetoothActivity : BaseActivity() {
 
     lateinit var listView: ListView
+
     private var mmOutStream: OutputStream? = null
+    private var mmInStream: InputStream? = null
 
     private var initialSetup = true
 
@@ -115,48 +118,80 @@ class BluetoothActivity : BaseActivity() {
                             // Connect to the remote device through the socket. This call blocks
                             // until it succeeds or throws an exception.
                             socket.connect()
-                            Toast.makeText(applicationContext, "Connected", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "Connected to Iskandar", Toast.LENGTH_SHORT).show()
 
                             var tmpOut: OutputStream? = null
 
-                            // Get the input and output streams, using temp objects because
-                            // member streams are final
-
-                            // Get the input and output streams, using temp objects because
+                            // Get the output stream, using temp objects because
                             // member streams are final
                             try {
                                 tmpOut = socket.outputStream
                             } catch (e: IOException) {
-                                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, "Failed to register OutputStream to Iskandar. Please make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
                             }
-
-                            // Hey Ryan, this is the block of code you were gonna use
-                            // The method you want is called get setIPAddress, example use below
-                            // setIPAddress(IP_Address)
 
                             mmOutStream = tmpOut
 
-                            val testingString = "THIS IS A TEST"
+                            val ssidString = "SSID:" + etSSID.text.toString() // Add SSID:
 
-                            val bytes = testingString.toByteArray() // converts entered String into bytes
+                            val passString = "PASS:" + etPassword.text.toString() // Add PASS:
+
+                            val ssidByteArray = ssidString.toByteArray()
+
+                            val passByteArray = passString.toByteArray()
 
                             try {
-                                mmOutStream!!.write(bytes)
-
-                                val intent: Intent = if (initialSetup) {
-                                    Intent(this, LocationActivity::class.java)
-                                } else {
-                                    Intent(this, HomeActivity::class.java)
-                                }
-                                startActivity(intent)
+                                mmOutStream?.write(ssidByteArray)
                             } catch (e: IOException) {
-                                Toast.makeText(applicationContext, "Failed to send.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, "Failed to send SSID. Make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
                             }
+
+                            try {
+                                mmOutStream?.write(passByteArray)
+                            } catch (e: IOException) {
+                                Toast.makeText(applicationContext, "Failed to send Password. Make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                            }
+
+                            var tmpIn: InputStream? = null
+
+                            // Get the input stream, using temp objects because
+                            // member streams are final
+                            try {
+                                tmpIn = socket.inputStream
+                            } catch (e: IOException) {
+                                Toast.makeText(applicationContext, "Failed to register InputStream to Iskandar. Please make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                            }
+
+                            mmInStream = tmpIn
+
+                            var ipAddress: ByteArray? = null
+
+                            try {
+                                ipAddress = mmInStream?.readBytes()
+                            } catch (e: IOException) {
+                                Toast.makeText(applicationContext, "Failed to obtain device IP. Make sure you are paired to the device.", Toast.LENGTH_SHORT).show()
+                            }
+
+                            var ipString = ipAddress.toString()
+
+                            ipString = "http://$ipString:5000/"
+
+                            setIPAddress(ipString)
+
+                            Toast.makeText(applicationContext, "Successfully Sent Network Information", Toast.LENGTH_SHORT).show()
+
+                            val intent: Intent = if (initialSetup) {
+                                Intent(this, LocationActivity::class.java)
+                            } else {
+                                Intent(this, HomeActivity::class.java)
+                            }
+
+                            startActivity(intent)
                         }
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
-                    Toast.makeText(applicationContext, "Not Connected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Could Not Connect to Iskandar Mirror. Please make sure you are paired.", Toast.LENGTH_SHORT).show()
                 }
             }
         }

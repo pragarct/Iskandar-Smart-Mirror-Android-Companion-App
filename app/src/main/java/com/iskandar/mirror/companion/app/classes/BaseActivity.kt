@@ -133,7 +133,7 @@ open class BaseActivity : AppCompatActivity() {
             .setCancelable(false)
             // Positive button text and action
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                val url = getString(R.string.server_url) + "refresh"
+                val url = getIPAddress() + "refresh"
                 putRequest(this, intent, url, "refresh", false)
             }
             // Negative button text and action
@@ -151,7 +151,7 @@ open class BaseActivity : AppCompatActivity() {
         doAsync {
             // Instantiate the RequestQueue.
             val queue = Volley.newRequestQueue(context)
-            val url = getString(R.string.server_url) + urlParam
+            val url = getIPAddress() + urlParam
 
             val future = RequestFuture.newFuture<JSONObject>()
             val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, JSONObject(), future, future)
