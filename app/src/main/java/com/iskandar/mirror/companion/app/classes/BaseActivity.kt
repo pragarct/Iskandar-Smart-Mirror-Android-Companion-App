@@ -1,6 +1,5 @@
 package com.iskandar.mirror.companion.app.classes
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.provider.CalendarContract
@@ -15,7 +14,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.RequestFuture
@@ -30,8 +28,10 @@ import com.iskandar.mirror.companion.app.activities.ui.LightingActivity
 import com.iskandar.mirror.companion.app.activities.ui.LocationActivity
 import com.iskandar.mirror.companion.app.activities.ui.SettingsActivity
 import com.iskandar.mirror.companion.app.data.IPAddressSharedPreference
+import com.iskandar.mirror.companion.app.data.IsConfiguredSharedPreference
 import kotlinx.android.synthetic.main.activity_home.drawer_layout
 import kotlinx.android.synthetic.main.activity_home.nav_view
+import kotlinx.android.synthetic.main.activity_welcome.*
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.util.Locale
@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
 private var fromCalendarApp = false
-private var IP_Address = "http://10.0.2.2:5000/"
+// private var IP_Address = "http://10.0.2.2:5000/"
 
 open class BaseActivity : AppCompatActivity() {
     // Navigation Bar
@@ -68,10 +68,11 @@ open class BaseActivity : AppCompatActivity() {
                     openGoogleCalenderApp()
                 }
                 R.id.nav_background -> {
-                    // TO DO
-                    // val intent = Intent(this, BackgroundOverviewActivity::class.java)
-                    // startActivity(intent)
-                    // getRequest(intent, this, "background_image")
+                    createDialog(
+                        getString(R.string.coming_soon_desc),
+                        getString(R.string.okay),
+                        getString(R.string.coming_soon)
+                    )
                 }
                 R.id.nav_ical_link -> {
                     val intent = Intent(this, ICalActivity::class.java)
@@ -212,7 +213,19 @@ open class BaseActivity : AppCompatActivity() {
                 }
             } catch (e: TimeoutException) {
                 runOnUiThread {
-                    Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                    if (urlParam == "configured") {
+                        val isConfigured = getIsConfigured()
+                        if (isConfigured) {
+                            createDialog(
+                                getString(R.string.welcome_connection_error_desc),
+                                getString(R.string.okay),
+                                getString(R.string.welcome_connection_error_title)
+                            )
+                            retryConnectionButton.visibility = View.VISIBLE
+                        }
+                    } else {
+                        Toast.makeText(context, getString(R.string.rest_get_error), Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
@@ -310,7 +323,7 @@ open class BaseActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-    fun Fragment.hideKeyboard() {
+    /*fun Fragment.hideKeyboard() {
         view?.let { activity?.hideKeyboard(it) }
     }
 
@@ -322,7 +335,7 @@ open class BaseActivity : AppCompatActivity() {
     fun Context.hideKeyboard(view: View) {
         val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
+    }*/
 
     // Used to add button for clearing EditText
     fun addRightCancelDrawable(editText: EditText) {
@@ -339,6 +352,35 @@ open class BaseActivity : AppCompatActivity() {
     fun setIPAddress(ipAddressInput: String) {
         val myPreference = IPAddressSharedPreference(this)
         myPreference.setIPAddress(ipAddressInput)
-        IP_Address = ipAddressInput
+        // IP_Address = ipAddressInput
+    }
+
+    fun getIsConfigured(): Boolean {
+        val myPreference = IsConfiguredSharedPreference(this)
+        return myPreference.getIsConfigured()
+    }
+
+    fun setIsConfigured(isConfiguredInput: Boolean) {
+        val myPreference = IsConfiguredSharedPreference(this)
+        myPreference.setIsConfigured(isConfiguredInput)
+        // IS_Configured = isConfigured
+    }
+
+    fun createDialog(message: String, negative: String, title: String) {
+        val dialogBuilder = AlertDialog.Builder(this)
+
+        // Set message of alert dialog
+        dialogBuilder.setMessage(message)
+            // If the dialog is cancelable
+            .setCancelable(true)
+            // Negative button text and action
+            .setNegativeButton(negative) { dialog, _ -> dialog.cancel() }
+
+        // Create dialog box
+        val alert = dialogBuilder.create()
+        // Set title for alert dialog box
+        alert.setTitle(title)
+        // Show alert dialog
+        alert.show()
     }
 }

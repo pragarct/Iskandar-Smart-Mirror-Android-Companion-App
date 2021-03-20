@@ -344,7 +344,7 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-            
+
             <!-- Column 2 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/help_button"
@@ -379,8 +379,8 @@
                         android:id="@+id/help_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/help"
                         android:layout_gravity="center"
+                        android:text="@string/help"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />

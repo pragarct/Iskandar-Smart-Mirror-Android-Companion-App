@@ -15,6 +15,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="submit">Submit</string>
+    <string name="okay">Okay</string>
 
 
     <!--Activity Names-->
@@ -31,13 +32,14 @@
     <string name="help">Help</string>
 
 
-    <!--Activity Titles-->
-
-
     <!--Welcome-->
     <string name="title_activity_test">Iskandar Companion App</string>
-    <string name="normal_start_button">Normal Start</string>
-    <string name="quick_start_button">Quick Start</string>
+    <string name="get_started">Get Started</string>
+    <string name="retry_connection">Retry Connection</string>
+    <string name="welcome_help_title">Welcome to the Iskandar Companion App!</string>
+    <string name="welcome_help_desc">Enter Personal Info - \n\nUse Default Data - Use pre-defined information for weather and traffic.  Can be changed later.</string>
+    <string name="welcome_connection_error_title">Something Went Wrong</string>
+    <string name="welcome_connection_error_desc">The connection to the server timed out.  Make sure you are near your mirror and try connecting again.</string>
 
 
     <!--Lighting-->
@@ -58,13 +60,19 @@
     <string name="welcome_back">Welcome Back</string>
 
 
+    <!--Background-->
+    <string name="coming_soon">Coming Soon!</string>
+    <string name="coming_soon_desc">This feature isn\'t available yet on Iskandar.  It\'s being worked on!</string>
+
+
     <!--iCal Link-->
     <string name="google_ical">Google iCal Link</string>
-    <string name="google_ical_explanation">What is a Google iCal Link?\nA Google iCal Link is a link that will be used to link Iskandar to your Google Calendar.</string>
-    <string name="google_ical_step1">1. Click this link https://calendar.google.com/calendar/u/0/r</string>
-    <string name="google_ical_step2">2. Under the "My calendars" section on the left side, hover over your username.</string>
-    <string name="google_ical_step3">3. Click the three dots and then click "Settings and sharing".</string>
-    <string name="google_ical_step4">4. Scroll down to the "Secret address in iCal format"</string>
+    <string name="google_ical_title">What is a Google iCal Link?</string>
+    <string name="google_ical_explanation">A Google iCal Link is a link that will be used to link Iskandar to your Google Calendar.</string>
+    <string name="google_ical_step1">1. Click this link:\nhttps://calendar.google.com/calendar/u/0/r</string>
+    <string name="google_ical_step2">2. Under the \"My calendars\" section on the left side, hover over your username.</string>
+    <string name="google_ical_step3">3. Click the three dots and then click \"Settings and sharing\".</string>
+    <string name="google_ical_step4">4. Scroll down to the \"Secret address in iCal format\" section near the bottom.</string>
     <string name="google_ical_step5">5. Copy that link and paste it in the textbox below"</string>
     <string name="ical_error_message">Please enter a valid iCal link.</string>
 
@@ -92,13 +100,10 @@
     <string name="work_school_address_error_message">Please enter either your work or school address.</string>
 
 
-    <!--BT Activity-->
+    <!--Bluetooth-->
     <string name="bt_title">Find Your Mirror</string>
-    <string name="bt_wifi_title">Enter Wifi Information</string>
-    <string name="bt_ssid">SSID: </string>
-    <string name="bt_ssid_input"> </string>
-    <string name="bt_password">Password: </string>
-    <string name="bt_password_hint"> </string>
+    <string name="bt_ssid_input">WiFi SSID</string>
+    <string name="bt_password_hint">WiFi Password</string>
     <string name="disc_title">Discovered Devices:</string>
     <string name="btn_visible">Find Visible</string>
     <string name="btn_enter_wifi">Enter</string>
@@ -107,7 +112,6 @@
     <!--Rest-->
     <string name="rest_get_error">Could not load information from Iskandar.  Please try again.</string>
     <string name="rest_put_error">Could not send information to Iskandar.  Please try again.</string>
-
 
 
     <!-- Preference Titles -->

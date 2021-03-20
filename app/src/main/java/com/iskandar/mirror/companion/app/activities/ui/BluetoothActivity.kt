@@ -14,7 +14,10 @@ import android.widget.TextView
 import android.widget.Toast
 import com.iskandar.mirror.companion.app.R
 import com.iskandar.mirror.companion.app.classes.BaseActivity
+import com.iskandar.mirror.companion.app.classes.makeClearableEditText
+import com.iskandar.mirror.companion.app.classes.onRightDrawableClicked
 import kotlinx.android.synthetic.main.activity_bluetooth.*
+import kotlinx.android.synthetic.main.activity_bluetooth.nav_view
 import java.io.IOException
 import java.io.OutputStream
 import java.util.UUID
@@ -30,8 +33,9 @@ lateinit var adapter: ArrayAdapter<String>
 class BluetoothActivity : BaseActivity() {
 
     lateinit var listView: ListView
-
     private var mmOutStream: OutputStream? = null
+
+    private var initialSetup = true
 
     companion object {
         var new_UUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
@@ -41,6 +45,28 @@ class BluetoothActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bluetooth)
+
+        val initialSetupMaybeNull: Boolean? = intent.extras?.getBoolean("initialSetup")
+        if (initialSetupMaybeNull != null) {
+            initialSetup = initialSetupMaybeNull
+        }
+
+        if (initialSetup) {
+            title = getString(R.string.iskandar_initial_setup)
+        } else {
+            setUpNavigationBar()
+            // Highlights the item in the navigation bar
+            nav_view.setCheckedItem(R.id.nav_bluetooth)
+        }
+
+        // Setup EditTexts
+        addRightCancelDrawable(editText_SSID)
+        editText_SSID.onRightDrawableClicked { it.text.clear() }
+        editText_SSID.makeClearableEditText(null, null)
+        addRightCancelDrawable(editText_Password)
+        editText_Password.onRightDrawableClicked { it.text.clear() }
+        editText_Password.makeClearableEditText(null, null)
+
         setUpNavigationBar()
         // Highlights the item in the navigation bar
         nav_view.setCheckedItem(R.id.nav_bluetooth)
@@ -50,18 +76,12 @@ class BluetoothActivity : BaseActivity() {
         listView = findViewById(R.id.lv_visible)
         val discDev = findViewById<TextView>(R.id.discDev)
         val btnVisible = findViewById<Button>(R.id.btn_visible)
-        val wifiHead = findViewById<TextView>(R.id.wifi_header)
-        val ssidTxt = findViewById<TextView>(R.id.ssid)
-        val passwordTxt = findViewById<TextView>(R.id.password)
         val btnEnterWifi = findViewById<TextView>(R.id.btn_enter_wifi)
         val etSSID = findViewById<TextView>(R.id.editText_SSID)
         val etPassword = findViewById<TextView>(R.id.editText_Password)
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
 
         btn_enter_wifi.setOnClickListener {
-            wifiHead.visibility = TextView.INVISIBLE
-            ssidTxt.visibility = TextView.INVISIBLE
-            passwordTxt.visibility = TextView.INVISIBLE
             btnEnterWifi.visibility = Button.INVISIBLE
             etSSID.visibility = EditText.INVISIBLE
             etPassword.visibility = EditText.INVISIBLE
@@ -122,6 +142,13 @@ class BluetoothActivity : BaseActivity() {
 
                             try {
                                 mmOutStream!!.write(bytes)
+
+                                val intent: Intent = if (initialSetup) {
+                                    Intent(this, LocationActivity::class.java)
+                                } else {
+                                    Intent(this, HomeActivity::class.java)
+                                }
+                                startActivity(intent)
                             } catch (e: IOException) {
                                 Toast.makeText(applicationContext, "Failed to send.", Toast.LENGTH_SHORT).show()
                             }

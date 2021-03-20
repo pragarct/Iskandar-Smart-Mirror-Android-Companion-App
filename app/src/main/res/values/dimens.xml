@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="marginTopMedium">32dp</dimen>
+    <dimen name="marginTopLarge">40dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="buttonPadding">16dp</dimen>
+    <dimen name="buttonPaddingStartEnd">32dp</dimen>
+    <dimen name="buttonText">16sp</dimen>
+
+    <dimen name="headerText">20sp</dimen>
 </resources>

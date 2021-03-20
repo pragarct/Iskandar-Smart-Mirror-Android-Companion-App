@@ -26,10 +26,11 @@ class HomeActivity : BaseActivity() {
             openGoogleCalenderApp()
         }
         background_button.setOnClickListener {
-            // TO DO
-            // val intent = Intent(this, BackgroundOverviewActivity::class.java)
-            // getRequest(intent, this, "background")
-            // startActivity(intent)
+            createDialog(
+                getString(R.string.coming_soon_desc),
+                getString(R.string.okay),
+                getString(R.string.coming_soon)
+            )
         }
         ical_link_button.setOnClickListener {
             val intent = Intent(this, ICalActivity::class.java)

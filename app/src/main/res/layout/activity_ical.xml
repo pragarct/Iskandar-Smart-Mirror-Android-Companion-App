@@ -11,63 +11,93 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/googleiCalTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/googleiCalTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="@dimen/marginTopLarge"
+            android:layout_marginEnd="@dimen/margin"
             android:padding="8dp"
-            android:text="@string/google_ical_explanation"
+            android:text="@string/google_ical_title"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/googleiCalStep1"
-            android:layout_width="wrap_content"
+            android:id="@+id/googleiCalTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:padding="8dp"
+            android:text="@string/google_ical_explanation"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleiCalTitle" />
+
+        <TextView
+            android:id="@+id/googleiCalStep1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:autoLink="web"
+            android:linksClickable="true"
             android:padding="8dp"
             android:text="@string/google_ical_step1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/googleiCalTextView" />
 
         <TextView
             android:id="@+id/googleiCalStep2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/margin"
             android:padding="8dp"
             android:text="@string/google_ical_step2"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/googleiCalStep1" />
 
         <TextView
             android:id="@+id/googleiCalStep3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/margin"
             android:padding="8dp"
             android:text="@string/google_ical_step3"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/googleiCalStep2" />
 
         <TextView
             android:id="@+id/googleiCalStep4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/margin"
             android:padding="8dp"
             android:text="@string/google_ical_step4"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/googleiCalStep3" />
 
         <TextView
             android:id="@+id/googleiCalStep5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/margin"
             android:padding="8dp"
             android:text="@string/google_ical_step5"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/googleiCalStep4" />
 
@@ -75,7 +105,9 @@
             android:id="@+id/googleiCalEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="@dimen/marginTopLarge"
+            android:layout_marginEnd="@dimen/margin"
             android:drawableEnd="@drawable/cancel"
             android:hint="@string/google_ical"
             android:importantForAutofill="no"
@@ -88,8 +120,14 @@
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginTop="@dimen/marginTopMedium"
+            android:layout_marginEnd="@dimen/margin"
+            android:padding="@dimen/buttonPadding"
+            android:paddingStart="@dimen/buttonPaddingStartEnd"
+            android:paddingEnd="@dimen/buttonPaddingStartEnd"
             android:text="@string/submit"
+            android:textSize="@dimen/buttonText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/googleiCalEditText" />

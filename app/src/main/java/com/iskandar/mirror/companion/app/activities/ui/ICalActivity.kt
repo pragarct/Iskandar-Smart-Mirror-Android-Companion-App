@@ -66,7 +66,7 @@ class ICalActivity : BaseActivity() {
             // Data is valid, open up Home Activity
             if (initialDataIsValid) {
                 val intent: Intent = if (initialSetup) {
-                    // This is in case another setup stage is needed/order is moved
+                    setIsConfigured(true)
                     Intent(this, HomeActivity::class.java)
                 } else {
                     Intent(this, HomeActivity::class.java)
@@ -85,7 +85,6 @@ class ICalActivity : BaseActivity() {
     private fun putGoogleCalenderLink(intent: Intent, initialSetup: Boolean) {
         val iCalLink = googleiCalEditText.text.toString()
         val url = getString(R.string.server_url) + "calendar?url=$iCalLink"
-        // TO DO similar setup to location setup for changing intent?
         putRequest(this, intent, url, "calendar", initialSetup)
     }
 }

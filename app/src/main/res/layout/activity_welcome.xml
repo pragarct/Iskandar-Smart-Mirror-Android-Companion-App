@@ -11,25 +11,34 @@
         layout="@layout/toolbar" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/normalStart"
+        android:id="@+id/getStartedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="@string/normal_start_button"
+        android:padding="@dimen/buttonPadding"
+        android:paddingStart="@dimen/buttonPaddingStartEnd"
+        android:paddingEnd="@dimen/buttonPaddingStartEnd"
+        android:text="@string/get_started"
+        android:textSize="@dimen/buttonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/quickStart"
+        android:id="@+id/retryConnectionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="@string/quick_start_button"
+        android:layout_margin="@dimen/margin"
+        android:padding="@dimen/buttonPadding"
+        android:paddingStart="@dimen/buttonPaddingStartEnd"
+        android:paddingEnd="@dimen/buttonPaddingStartEnd"
+        android:text="@string/retry_connection"
+        android:textSize="@dimen/buttonText"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/normalStart" />
+        app:layout_constraintTop_toBottomOf="@+id/getStartedButton" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/help_fab"
