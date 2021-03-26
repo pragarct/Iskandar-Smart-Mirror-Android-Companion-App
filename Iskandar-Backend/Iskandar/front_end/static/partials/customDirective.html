@@ -1,0 +1,90 @@
+<!-- Clock -->
+<div class="row" ng-if="tiles[loc] == 'clock'" style="height: calc(100% - 80px); display: flex; align-items: flex-end;">
+  <div class="col-sm-8 align-bottom" >
+    <div>
+      <div>
+        <div id="clock"></div>
+        <div id="date"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Weather -->
+<div class="row" ng-if="tiles[loc] == 'weather'" style="height: calc(100% - 80px); display: flex; align-items: flex-end;">
+  <div class="col-sm-4" ng-repeat="day in config.weather.future.data.daily" ng-if="$index < 3 && $index >= 0" style="padding-left: 5px; padding-right: 5px;">
+    <div class="col-sm-12 weatherTile">
+      <div class="row" style="padding-top: 5px">
+        <h4 style="margin: auto;">{a getFutureDate(day, $index) a}</h4>
+      </div>
+      <div class="row">
+        <i class="wi" ng-class="getFutureIcon(day)" style="font-size: 64px; margin: auto; padding-top: 10px"></i>
+      </div>
+      <div class="row">
+        <h4 style="margin: auto; padding-top: 10px">{a day.temp.day | number:0 a} {a config.weather.unitSymbol a}</h4>
+      </div>
+      <div class="row" style="padding-bottom: 5px">
+        <div class="col-sm-6">
+          <span style="font-size: .85rem;">{a day.temp.min | number:0 a} {a config.weather.unitSymbol a}</span>
+        </div>
+        <div class="col-sm-6 text-right">
+          <span style="font-size: .85rem;">{a day.temp.max | number:0 a} {a config.weather.unitSymbol a}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Calendar -->
+<div class="row" style="height: 100%" ng-if="tiles[loc] == 'calendar'">
+  <div class="col-sm-12" style="padding: 0px; color: white">
+    <div class="col-sm-12" style="padding-left: 34px; padding-right: 34px; height: 100%">
+      <div class="row calendarBorder"> <!-- height was 75%  style="height:75%" -->
+        <div class="row" style="width: 100%; height: min-content; margin: 0px">
+          <h4 style="margin: auto">{a config.calendar.month a}</h4>
+        </div>
+        <div class="row" style="width: calc(100% + 3px); height: 100%; margin: 0px; margin-right: -3px;">
+          <table style="width: inherit;">
+            <thead>
+              <tr class="calRowTop">
+                <th class="calColLeft" style="width: 14%; text-align: center">Sun</th>
+                <th class="calCol" style="width: 14%; text-align: center">Mon</th>
+                <th class="calCol" style="width: 14%; text-align: center">Tue</th>
+                <th class="calCol" style="width: 14%; text-align: center">Wed</th>
+                <th class="calCol" style="width: 14%; text-align: center">Thu</th>
+                <th class="calCol" style="width: 14%; text-align: center">Fri</th>
+                <th class="calColRight" style="width: 14%; text-align: center">Sat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="calRowTop" ng-repeat="days in config.calendar.weeks" style="height: 60px; vertical-align: top;">
+                <td class="calColLeft"><span ng-if="days[0].name == 'Sun'" ng-style="{ color: days[0].color }">{a days[0].num a}</span> <i ng-repeat="e in days[0].events" class="fa fa-circle" ng-style="{ color: e }" style="float: right; margin: 3px;"></i></td>
+                <td class="calCol"><span ng-if="days[1].name == 'Mon'" ng-style="{ color: days[1].color }">{a days[1].num a}</span> <i ng-repeat="e in days[1].events" class="fa fa-circle" ng-style="{ color: e }" style="float: right; margin: 3px;"></i></td>
+                <td class="calCol"><span ng-if="days[2].name == 'Tue'" ng-style="{ color: days[2].color }">{a days[2].num a}</span> <i ng-repeat="e in days[2].events" class="fa fa-circle" ng-style="{ color: e }" style="float: right; margin: 3px;"></i></td>
+                <td class="calCol"><span ng-if="days[3].name == 'Wed'" ng-style="{ color: days[3].color }">{a days[3].num a}</span> <i ng-repeat="e in days[3].events" class="fa fa-circle" ng-style="{ color: e }" style="float: right; margin: 3px;"></i></td>
+                <td class="calCol"><span ng-if="days[4].name == 'Thu'" ng-style="{ color: days[4].color }">{a days[4].num a}</span> <i ng-repeat="e in days[4].events" class="fa fa-circle" ng-style="{ color: e }" style="float: right; margin: 3px;"></i></td>
+                <td class="calCol"><span ng-if="days[5].name == 'Fri'" ng-style="{ color: days[5].color }">{a days[5].num a}</span> <i ng-repeat="e in days[5].events" class="fa fa-circle" ng-style="{ color: e }" style="float: right; margin: 3px;"></i></td>
+                <td class="calColRight"><span ng-if="days[6].name == 'Sat'" ng-style="{ color: days[6].color }">{a days[6].num a}</span> <i ng-repeat="e in days[6].events" class="fa fa-circle" ng-style="{ color: e }" style="float: right; margin: 3px;"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <span style="font-size: 1.5rem; border-bottom: 4px solid #ccc; margin: auto"><i class="fa fa-calendar"></i>&nbsp&nbspUpcoming Calendar Events</span>
+      </div>
+      <div class="row">
+        <ul>
+          <li ng-repeat="e in config.calendar.events">
+            <i class="fa fa-circle" ng-style="{ color: e.color }"></i> {a e.summary a}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-top: 50px; height: 100%" ng-if="tiles[loc] == 'traffic'">
+  <div class="col-sm-12" style="padding: 0px; color: white; text-align: center">
+    <div class="col-sm-12" style="padding-left: 34px; padding-right: 34px; height: 100%">
+        <span style="font-weight: bold; font-size: 24px"><i class="fa fa-car"></i>&nbsp&nbsp{a config.traffic.dir.duration a} drive to work ({a config.traffic.dir.distance a} mi)</span>
+    </div>
+  </div>
+</div>

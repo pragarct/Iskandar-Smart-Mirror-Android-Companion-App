@@ -1,0 +1,56 @@
+#clock{
+    font-size:48px;
+    text-shadow:0px 0px 1px #fff;
+    color:#fff;
+}
+#clock span {
+    color:#888;
+    text-shadow:0px 0px 1px #8a1515;
+    font-size:26px;
+}
+#date {
+    letter-spacing: 5px;
+    font-size:14px;
+    color:#fff;
+    white-space: nowrap;
+}
+
+.weatherTile {
+  border: 4px solid #ccc!important;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.calendarBorder {
+    border: 4px solid #ccc!important;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.calRowTop {
+    border-top: 2px solid #ccc!important;
+}
+
+.calColLeft {
+    border-right: 2px solid #ccc!important;
+    font-weight: bold;
+}
+
+.calColRight {
+    border-left: 2px solid #ccc!important;
+    font-weight: bold;
+}
+
+.calCol {
+    border-right: 2px solid #ccc!important;
+    border-left: 2px solid #ccc!important;
+    font-weight: bold;
+}
+
+.rowCss {
+    height: 33vh;
+}

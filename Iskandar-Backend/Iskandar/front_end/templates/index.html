@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Uncomment for Flask -->
+    <script type=text/javascript src="{{url_for('static', filename='angular.min.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='root.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='popper.min.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='jquery-3.5.1.min.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='ical.min.js') }}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css') }}"><link>
+    <link rel="stylesheet" href="{{url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}"><link>
+    <link rel="stylesheet" href="{{url_for('static', filename='weather-icons.min.css') }}"><link>
+    <link rel="stylesheet" href="{{url_for('static', filename='root.css') }}"><link>
+    <!-- Comment out for Flask -->
+<!--    <script type=text/javascript src="static/angular.min.js"></script>
+    <script type=text/javascript src="static/popper.min.js"></script>
+    <script type=text/javascript src="static/jquery-3.5.1.min.js"></script>
+    <script type=text/javascript src="static/root.js"></script>
+    <link rel="stylesheet" href="static/bootstrap.min.css"><link>
+    <link rel="stylesheet" href="static/font-awesome-4.7.0/css/font-awesome.min.css"><link>
+    <link rel="stylesheet" href="static/weather-icons.min.css"><link>
+    <link rel="stylesheet" href="static/root.css"><link>-->
+  </head>
+  <body ng-app="mirrorMain" style="background-color: black">
+    <div class="container-fluid" ng-controller="mirrorCtrl" style="height: 100vh; padding: 50px 50px; overflow: hidden">
+      <div class="row rowCss"> <!-- Row 1 -->
+        <div class="col-sm-6 colCss"> <!-- Column 1 -->
+          <custom-directive tiles="globals.tileLocations" loc="0"></custom-directive>
+        </div>
+        <div class="col-sm-2 colCss"> <!-- Column 2 -->
+          <custom-directive tiles="globals.tileLocations" loc="1"></custom-directive>
+        </div>
+        <div class="col-sm-4 colCss"> <!-- Column 3 -->
+          <custom-directive tiles="globals.tileLocations" loc="2"></custom-directive>
+        </div>
+      </div>
+      <div class="row rowCss"> <!-- Row 2 -->
+        <div class="col-sm-4 colCss"> <!-- Column 4 -->
+          <custom-directive tiles="globals.tileLocations" loc="3"></custom-directive>
+        </div>
+        <div class="col-sm-4 colCss"> <!-- Column 5 -->
+          <custom-directive tiles="globals.tileLocations" loc="4"></custom-directive>
+        </div>
+        <div class="col-sm-4 colCss"> <!-- Column 6 -->
+          <custom-directive tiles="globals.tileLocations" loc="5"></custom-directive>
+        </div>
+      </div>
+      <div class="row rowCss"> <!-- Row 3 -->
+        <div class="col-sm-6 colCss"> <!-- Column 7 -->
+          <custom-directive tiles="globals.tileLocations" loc="6"></custom-directive>
+        </div>
+        <!--<div class="col-sm-2 colCss">
+          <custom-directive tiles="globals.tileLocations" loc="7"></custom-directive>
+        </div>-->
+        <div class="col-sm-6 colCss"> <!-- Column 9 -->
+          <custom-directive tiles="globals.tileLocations" loc="7"></custom-directive>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
