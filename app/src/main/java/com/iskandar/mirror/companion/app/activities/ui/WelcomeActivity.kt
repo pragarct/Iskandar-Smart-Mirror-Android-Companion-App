@@ -16,7 +16,7 @@ class WelcomeActivity : BaseActivity() {
 
         // Create listener for normally starting the app
         getStartedButton.setOnClickListener {
-            val intent = Intent(this, BluetoothActivity::class.java)
+            val intent = Intent(this, LocationActivity::class.java)
             startActivity(intent)
         }
 
